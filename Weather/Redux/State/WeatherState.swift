@@ -6,7 +6,10 @@
 //  Copyright © 2020 Maxime Maheo. All rights reserved.
 //
 
+import Foundation
+
 struct WeatherState: ReduxState {
     var forecast: Forecast?
     var isLoading: Bool = false
+    var lastUpdate: Date = Date()
 }

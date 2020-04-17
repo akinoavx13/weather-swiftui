@@ -20,6 +20,7 @@ struct HomepageView: ConnectedView {
         let hourlyForecasts: [DataForecast]
         let weekForecastSummary: String
         let dailyForecasts: [DataForecast]
+        let lastUpdate: Date
     }
     
     // MARK: - Methods
@@ -32,7 +33,8 @@ struct HomepageView: ConnectedView {
               nextForecastSummary: state.weatherState.forecast?.hourly.summary ?? "",
               hourlyForecasts: state.weatherState.forecast?.hourly.data ?? [],
               weekForecastSummary: state.weatherState.forecast?.daily.summary ?? "",
-              dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []))
+              dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []),
+              lastUpdate: state.weatherState.lastUpdate)
     }
     
     // MARK: - Body
@@ -42,19 +44,23 @@ struct HomepageView: ConnectedView {
                 
                 if props.isLoading {
                     LoadingComponent()
+                } else {
+                    CurrentForecastComponent(temperature: props.temperature,
+                                             feelingTemperature: props.feelingTemperature,
+                                             icon: props.currentForecastIcon,
+                                             imageDescription: props.currentForecastDescription)
+                    
+                    NextForecastComponent(hours: Int(Date().format(format: "HH")) ?? 0,
+                                          summary: props.nextForecastSummary,
+                                          hourlyForecasts: props.hourlyForecasts)
+                    
+                    WeekForecastComponent(summary: props.weekForecastSummary,
+                                          dailyForecasts: props.dailyForecasts)
+                    
+                    Spacer()
+                    
+                    ReloadButtonComponent(lastUpdate: props.lastUpdate)
                 }
-                
-                CurrentForecastComponent(temperature: props.temperature,
-                                         feelingTemperature: props.feelingTemperature,
-                                         icon: props.currentForecastIcon,
-                                         imageDescription: props.currentForecastDescription)
-                
-                NextForecastComponent(hours: Int(Date().format(format: "HH")) ?? 0,
-                                      summary: props.nextForecastSummary,
-                                      hourlyForecasts: props.hourlyForecasts)
-                
-                WeekForecastComponent(summary: props.weekForecastSummary,
-                                      dailyForecasts: props.dailyForecasts)
             }
         }
         .padding()

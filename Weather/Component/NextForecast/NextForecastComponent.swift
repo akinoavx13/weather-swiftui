@@ -40,7 +40,7 @@ struct NextForecastComponent: View {
                     ForEach(hourlyForecasts) { forecast in
                         HourlyForecastComponent(temperature: Int(forecast.temperature ?? 0),
                                                 icon: forecast.imageIcon,
-                                                hour: forecast.date.format(format: "H:ss"),
+                                                hour: forecast.date.format(format: "HH:mm"),
                                                 imageDescription: forecast.iconDescription)
                     }
                 }

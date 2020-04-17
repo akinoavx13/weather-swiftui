@@ -20,7 +20,6 @@ struct LoadingComponent: View {
             
             VStack {
                 Image(systemName: "arrow.2.circlepath")
-                    .foregroundColor(.backgroundColorIcon)
                     .rotationEffect(.degrees(degrees))
                     .animation(Animation
                         .easeInOut(duration: 1)
@@ -46,8 +45,10 @@ struct LoadingComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LoadingComponent()
+                .environment(\.colorScheme, .light)
             
             LoadingComponent()
+                .environment(\.colorScheme, .dark)
                 .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
         }
         

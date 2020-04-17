@@ -6,6 +6,8 @@
 //  Copyright © 2020 Maxime Maheo. All rights reserved.
 //
 
+import Foundation
+
 func weatherReducer(state: WeatherState, action: Action) -> WeatherState {
     var state = state
     
@@ -14,6 +16,7 @@ func weatherReducer(state: WeatherState, action: Action) -> WeatherState {
         state.isLoading = true
     case let action as WeatherAction.SetForecast:
         state.forecast = action.forecast
+        state.lastUpdate = Date()
         state.isLoading = false
     default:
         break
