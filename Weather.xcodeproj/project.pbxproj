@@ -61,6 +61,7 @@
 		52236D402445959A0007CF87 /* TemperatureVerticalBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52236D3F2445959A0007CF87 /* TemperatureVerticalBarComponent.swift */; };
 		52236D4224459A020007CF87 /* WeekForecastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52236D4124459A020007CF87 /* WeekForecastComponent.swift */; };
 		52236D4424459A300007CF87 /* SectionTitleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52236D4324459A300007CF87 /* SectionTitleComponent.swift */; };
+		52292B98244A003C00C8E3B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52292B9A244A003C00C8E3B2 /* InfoPlist.strings */; };
 		524802382445DA1400B6DE0D /* DailyForecastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524802372445DA1400B6DE0D /* DailyForecastComponent.swift */; };
 		52B6E05D2445DC720090C44B /* TemperatureHorizontalBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6E05C2445DC720090C44B /* TemperatureHorizontalBarComponent.swift */; };
 		52D9DD172449856F00647079 /* LocationServiceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D9DD162449856F00647079 /* LocationServiceContract.swift */; };
@@ -122,6 +123,8 @@
 		52236D3F2445959A0007CF87 /* TemperatureVerticalBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureVerticalBarComponent.swift; sourceTree = "<group>"; };
 		52236D4124459A020007CF87 /* WeekForecastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastComponent.swift; sourceTree = "<group>"; };
 		52236D4324459A300007CF87 /* SectionTitleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleComponent.swift; sourceTree = "<group>"; };
+		52292B99244A003C00C8E3B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		52292B9B244A003E00C8E3B2 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		524802372445DA1400B6DE0D /* DailyForecastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastComponent.swift; sourceTree = "<group>"; };
 		52B6E05C2445DC720090C44B /* TemperatureHorizontalBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureHorizontalBarComponent.swift; sourceTree = "<group>"; };
 		52D9DD162449856F00647079 /* LocationServiceContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceContract.swift; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		5217ED412444FAEB006BEAE8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				52292B9A244A003C00C8E3B2 /* InfoPlist.strings */,
 				52066F062449902500C85370 /* Localizable.strings */,
 				521588A224450CA7003B8F65 /* R.generated.swift */,
 				5217ED332444FADB006BEAE8 /* Assets.xcassets */,
@@ -512,6 +516,7 @@
 				52066F042449902500C85370 /* Localizable.strings in Resources */,
 				5217ED372444FADB006BEAE8 /* Preview Assets.xcassets in Resources */,
 				5217ED342444FADB006BEAE8 /* Assets.xcassets in Resources */,
+				52292B98244A003C00C8E3B2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +640,15 @@
 				52066F032449901C00C85370 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		52292B9A244A003C00C8E3B2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52292B99244A003C00C8E3B2 /* en */,
+				52292B9B244A003E00C8E3B2 /* fr */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

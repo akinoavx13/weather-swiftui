@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Weather
+
+  Created by Maxime Maheo on 17/04/2020.
+  Copyright © 2020 Maxime Maheo. All rights reserved.
+*/
+NSLocationWhenInUseUsageDescription = "Fetch weather forecasts depending on your location.";
