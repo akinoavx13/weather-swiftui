@@ -7,13 +7,15 @@
 //
 
 import RxSwift
+import RxCocoa
 import CoreLocation
 
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
     private let manager = CLLocationManager()
-    private var userLocation: PublishSubject<CLLocation> = .init()
+    private var userLocation: PublishRelay<CLLocation> = .init()
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     override init() {
@@ -24,9 +26,28 @@ final class LocationService: NSObject, LocationServiceContract {
     
     // MARK: - Methods
     func getUserLocation() -> Single<CLLocation> {
-        manager.requestWhenInUseAuthorization()
+        if !CLLocationManager.locationServicesEnabled() {
+            return Single.never()
+        }
         
-        return userLocation.asSingle()
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            manager.requestLocation()
+        } else {
+            manager.requestWhenInUseAuthorization()
+        }
+        
+        return Single.create { [weak self] (single) in
+            guard let self = self else { return Disposables.create() }
+        
+            self.userLocation
+                .subscribe(onNext: { (location) in
+                    single(.success(location))
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
+
     }
 }
 
@@ -41,12 +62,9 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            userLocation.on(.next(location))
-            userLocation.on(.completed)
+            userLocation.accept(location)
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        userLocation.on(.error(error))
-    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) { }
 }
