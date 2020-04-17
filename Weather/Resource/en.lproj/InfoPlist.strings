@@ -6,4 +6,4 @@
   Copyright © 2020 Maxime Maheo. All rights reserved.
 */
 NSLocationWhenInUseUsageDescription = "Fetch weather forecasts depending on your location.";
-CFBundleName = "Weather";
+CFBundleName = "Weather summary";

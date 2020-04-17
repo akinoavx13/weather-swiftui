@@ -6,4 +6,4 @@
   Copyright © 2020 Maxime Maheo. All rights reserved.
 */
 NSLocationWhenInUseUsageDescription = "Récupérez les prévisions météo en fonction de votre emplacement.";
-CFBundleName = "Météo";
+CFBundleName = "Résumé météo";
