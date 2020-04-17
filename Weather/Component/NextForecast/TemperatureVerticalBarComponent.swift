@@ -50,6 +50,8 @@ struct TemperatureVerticalBarComponent: View {
     }
 }
 
+#if DEBUG
+
 struct TemperatureVerticalBarComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -60,3 +62,5 @@ struct TemperatureVerticalBarComponent_Previews: PreviewProvider {
         }
     }
 }
+
+#endif

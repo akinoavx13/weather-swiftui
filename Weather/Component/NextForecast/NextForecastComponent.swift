@@ -49,6 +49,8 @@ struct NextForecastComponent: View {
     }
 }
 
+#if DEBUG
+
 struct NextForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         NextForecastComponent(hours: 7,
@@ -56,3 +58,5 @@ struct NextForecastComponent_Previews: PreviewProvider {
                               hourlyForecasts: DataForecast.list)
     }
 }
+
+#endif

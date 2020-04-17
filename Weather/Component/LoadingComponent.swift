@@ -40,6 +40,8 @@ struct LoadingComponent: View {
     }
 }
 
+#if DEBUG
+
 struct LoadingComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -51,3 +53,5 @@ struct LoadingComponent_Previews: PreviewProvider {
         
     }
 }
+
+#endif

@@ -31,6 +31,8 @@ struct HourlyForecastComponent: View {
     }
 }
 
+#if DEBUG
+
 struct HourlyForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         HourlyForecastComponent(temperature: 40,
@@ -39,3 +41,5 @@ struct HourlyForecastComponent_Previews: PreviewProvider {
                                 imageDescription: "cloud")
     }
 }
+
+#endif

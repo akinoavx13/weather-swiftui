@@ -45,6 +45,8 @@ struct DailyForecastComponent: View {
     }
 }
 
+#if DEBUG
+
 struct DailyForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -66,3 +68,5 @@ struct DailyForecastComponent_Previews: PreviewProvider {
         }
     }
 }
+
+#endif

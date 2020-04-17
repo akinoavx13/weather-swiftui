@@ -33,6 +33,8 @@ struct WeatherIconComponent: View {
     }
 }
 
+#if DEBUG
+
 struct WeatherIconComponent_Previews: PreviewProvider {
     static var previews: some View {
         WeatherIconComponent(icon: R.image.icn_weather_rain(),
@@ -41,3 +43,5 @@ struct WeatherIconComponent_Previews: PreviewProvider {
                              imageDescription: "cloud")
     }
 }
+
+#endif

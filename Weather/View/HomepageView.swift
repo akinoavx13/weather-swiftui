@@ -64,6 +64,8 @@ struct HomepageView: ConnectedView {
     }
 }
 
+#if DEBUG
+
 struct HomepageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -76,3 +78,5 @@ struct HomepageView_Previews: PreviewProvider {
         }
     }
 }
+
+#endif

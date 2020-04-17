@@ -6,6 +6,9 @@ target 'Weather' do
   use_frameworks!
 
   # Pods for Weather
+  pod 'Firebase/Crashlytics'
+
+  # Recommended: Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
 
 end
