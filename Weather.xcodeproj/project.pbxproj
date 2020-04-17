@@ -81,7 +81,7 @@
 		521588AA24451637003B8F65 /* Locale+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Language.swift"; sourceTree = "<group>"; };
 		521588AC244516FC003B8F65 /* HourlyForecastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastComponent.swift; sourceTree = "<group>"; };
 		521588AE24451A49003B8F65 /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
-		5217ED2A2444FAD9006BEAE8 /* Weathery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weathery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5217ED2A2444FAD9006BEAE8 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5217ED2D2444FAD9006BEAE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5217ED2F2444FAD9006BEAE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5217ED312444FAD9006BEAE8 /* HomepageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageView.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		5217ED2B2444FAD9006BEAE8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5217ED2A2444FAD9006BEAE8 /* Weathery.app */,
+				5217ED2A2444FAD9006BEAE8 /* Weather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -496,7 +496,7 @@
 				521588A524450D32003B8F65 /* Rswift */,
 			);
 			productName = Weather;
-			productReference = 5217ED2A2444FAD9006BEAE8 /* Weathery.app */;
+			productReference = 5217ED2A2444FAD9006BEAE8 /* Weather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -878,7 +878,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maxime.maheo.weather;
-				PRODUCT_NAME = Weathery;
+				PRODUCT_NAME = Weather;
 				PROVISIONING_PROFILE_SPECIFIER = "Weather Dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -903,7 +903,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maxime.maheo.weather;
-				PRODUCT_NAME = Weathery;
+				PRODUCT_NAME = Weather;
 				PROVISIONING_PROFILE_SPECIFIER = "Weather Prod";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
