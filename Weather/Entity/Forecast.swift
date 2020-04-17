@@ -82,6 +82,38 @@ struct DataForecast: Codable, Identifiable {
         
         return nil
     }
+    
+    var iconDescription: String {
+        if icon == "clear-day" {
+            return R.string.localizable.clear_day()
+        } else if icon == "clear-night" {
+            return R.string.localizable.clear_night()
+        } else if icon == "rain" {
+            return R.string.localizable.rain()
+        } else if icon == "snow" {
+            return R.string.localizable.snow()
+        } else if icon == "sleet" {
+            return R.string.localizable.sleet()
+        } else if icon == "wind" {
+            return R.string.localizable.wind()
+        } else if icon == "fog" {
+            return R.string.localizable.fog()
+        } else if icon == "cloudy" {
+            return R.string.localizable.cloudy()
+        } else if icon == "partly-cloudy-day" {
+            return R.string.localizable.partly_cloudy_day()
+        } else if icon == "partly-cloudy-night" {
+            return R.string.localizable.partly_cloudy_night()
+        } else if icon == "hail" {
+            return R.string.localizable.hail()
+        } else if icon == "thunderstorm" {
+            return R.string.localizable.thunderstorm()
+        } else if icon == "tornado" {
+            return R.string.localizable.tornado()
+        }
+        
+        return ""
+    }
 }
 
 #if DEBUG

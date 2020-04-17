@@ -36,3 +36,4 @@ playground.xcworkspace
 
 # Carthage
 Carthage/Build
+R.generated.swift

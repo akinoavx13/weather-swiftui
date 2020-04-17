@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Maxime Maheo on 17/04/2020.
+  Copyright © 2020 Maxime Maheo. All rights reserved.
+*/
+"loading" = "Chargement";
+"currently" = "Actuellement";
+"forecast_for_the_next_hour" = "Prévisions pour la prochaine heure.";
+"feeling" = "Ressenti";
+"this_night" = "Cette nuit";
+"this_morning" = "Ce matin";
+"this_afternoon" = "Cet après-midi";
+"tonight" = "Ce soir";
+"forecast_summary" = "Résumé des prévisions.";
+"this_week" = "Cette semaine";
+"minimum_temperature" = "Température minimum";
+"maximum_temperature" = "Température maximum";
+"precipication" = "Précipication";
+"clear_day" = "Journée ensoleillée";
+"clear_night" = "Nuit dégagée";
+"rain" = "Pluie";
+"snow" = "Neige";
+"sleet" = "Giboulée";
+"wind" = "Vent";
+"fog" = "Brouillard";
+"cloudy" = "Nuageux";
+"partly_cloudy_day" = "Journée partiellement nuageuse";
+"partly_cloudy_night" = "Nuit partiellement nuageuse";
+"hail" = "Grêle";
+"thunderstorm" = "Orage";
+"tornado" = "Tornado";

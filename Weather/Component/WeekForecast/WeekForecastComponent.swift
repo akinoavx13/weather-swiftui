@@ -17,7 +17,7 @@ struct WeekForecastComponent: View {
     // MARK: - Body
     var body: some View {
         VStack(alignment: .leading) {
-            SectionTitleComponent(title: "This week",
+            SectionTitleComponent(title: R.string.localizable.this_week(),
                                   subtitle: summary)
             
             VStack(alignment: .leading, spacing: 8) {
@@ -27,7 +27,7 @@ struct WeekForecastComponent: View {
                                                        temperatureMax: Int(forecast.temperatureMax ?? 0),
                                                        precipitationProbability: forecast.precipProbability,
                                                        icon: forecast.imageIcon,
-                                                       imageDescription: forecast.icon)
+                                                       imageDescription: forecast.iconDescription)
                             }
                         }
         }

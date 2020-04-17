@@ -17,13 +17,13 @@ struct NextForecastComponent: View {
     
     private var title: String {
         if hours >= 0 && hours <= 6 || hours >= 23 && hours <= 24 {
-            return "Tonight"
+            return R.string.localizable.this_night()
         } else if hours >= 7 && hours <= 11 {
-            return "This morning"
+            return R.string.localizable.this_morning()
         } else if hours >= 12 && hours <= 18 {
-            return "This afternoon"
+            return R.string.localizable.this_afternoon()
         } else if hours >= 19 && hours <= 22 {
-            return "Tonight"
+            return R.string.localizable.tonight()
         }
         
         return ""
@@ -33,7 +33,7 @@ struct NextForecastComponent: View {
     var body: some View {
         VStack(alignment: .leading) {
             SectionTitleComponent(title: title,
-                                  subtitle: "Forecast summary. \(summary)")
+                                  subtitle: "\(R.string.localizable.forecast_summary()) \(summary)")
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .bottom, spacing: 8) {
@@ -41,7 +41,7 @@ struct NextForecastComponent: View {
                         HourlyForecastComponent(temperature: Int(forecast.temperature ?? 0),
                                                 icon: forecast.imageIcon,
                                                 hour: forecast.date.format(format: "H:ss"),
-                                                imageDescription: forecast.icon)
+                                                imageDescription: forecast.iconDescription)
                     }
                 }
             }
@@ -52,7 +52,7 @@ struct NextForecastComponent: View {
 struct NextForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         NextForecastComponent(hours: 7,
-                              summary: "Ciel dégagé toute la journée.",
+                              summary: "Clear skies all day.",
                               hourlyForecasts: DataForecast.list)
     }
 }

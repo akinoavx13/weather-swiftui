@@ -27,7 +27,7 @@ struct LoadingComponent: View {
                         .repeatForever(autoreverses: false)
                     )
                 
-                Text("Loading ...")
+                Text("\(R.string.localizable.loading()) ...")
                     .font(.subheadline)
             }
             .padding()

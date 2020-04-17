@@ -20,19 +20,20 @@ struct CurrentForecastComponent: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            SectionTitleComponent(title: "Currently",
-                                  subtitle: "Forecast for the next hour.")
+            SectionTitleComponent(title: R.string.localizable.currently(),
+                                  subtitle: R.string.localizable.forecast_for_the_next_hour())
             
             HStack(alignment: .center) {
                 WeatherIconComponent(icon: icon,
-                                     size: 100, imageDescription: imageDescription)
+                                     size: 100,
+                                     imageDescription: imageDescription)
                 
                 VStack(alignment: .leading) {
                     Text("\(temperature)°")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("Feeling \(feelingTemperature)°")
+                    Text("\(R.string.localizable.feeling()) \(feelingTemperature)°")
                         .font(.headline)
                 }
             }

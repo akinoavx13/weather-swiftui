@@ -20,7 +20,7 @@ struct HumidityComponent: View {
         HStack(alignment: .center) {
             Text("\(Int(precipitationProbability * 100))%")
                 .font(.caption)
-                .accessibility(label: Text("Precipication"))
+                .accessibility(label: Text(R.string.localizable.precipication()))
                 .accessibility(value: Text("\(Int(precipitationProbability * 100))%"))
             
             WeatherIconComponent(icon: icon,
