@@ -30,12 +30,6 @@ final class LocationService: NSObject, LocationServiceContract {
             return Single.never()
         }
         
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            manager.requestLocation()
-        } else {
-            manager.requestWhenInUseAuthorization()
-        }
-        
         return Single.create { [weak self] (single) in
             guard let self = self else { return Disposables.create() }
         
@@ -45,9 +39,14 @@ final class LocationService: NSObject, LocationServiceContract {
                 })
                 .disposed(by: self.disposeBag)
             
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                self.manager.requestLocation()
+            } else {
+                self.manager.requestWhenInUseAuthorization()
+            }
+            
             return Disposables.create()
         }
-
     }
 }
 
