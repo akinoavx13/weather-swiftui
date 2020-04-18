@@ -13,7 +13,6 @@ struct WeatherIconComponent: View {
     // MARK: - Properties
     var icon: UIImage?
     var size: CGFloat
-    var backgroundColor: Color = .backgroundColorIcon
     var imageDescription: String
     
     // MARK: - Body
@@ -21,7 +20,7 @@ struct WeatherIconComponent: View {
         ZStack {
             Circle()
                 .frame(width: size, height: size)
-                .foregroundColor(backgroundColor)
+                .foregroundColor(.midnightBlue)
             
             if icon != nil {
                 Image(uiImage: icon!)
@@ -39,7 +38,6 @@ struct WeatherIconComponent_Previews: PreviewProvider {
     static var previews: some View {
         WeatherIconComponent(icon: R.image.icn_weather_rain(),
                              size: 70,
-                             backgroundColor: .backgroundColorIcon,
                              imageDescription: "cloud")
     }
 }

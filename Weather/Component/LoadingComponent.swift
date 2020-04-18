@@ -25,6 +25,7 @@ struct LoadingComponent: View {
                         .easeInOut(duration: 1)
                         .repeatForever(autoreverses: false)
                     )
+                    .accessibility(hidden: true)
                 
                 Text("\(R.string.localizable.loading()) ...")
                     .font(.subheadline)
