@@ -32,4 +32,4 @@
 "thunderstorm" = "Orage";
 "tornado" = "Tornado";
 "reload" = "Rafraîchir";
-"last_update" = "Dernière mise à jour : %@";
+"last_update" = "Dernière mise à jour, %@";

@@ -32,4 +32,4 @@
 "thunderstorm" = "Thunderstorm";
 "tornado" = "Tornado";
 "reload" = "Reload";
-"last_update" = "Last update : %@";
+"last_update" = "Last update, %@";

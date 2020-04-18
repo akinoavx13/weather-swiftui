@@ -42,6 +42,7 @@ struct TemperatureHorizontalBarComponent: View {
                 .font(.caption)
                 .padding(8)
                 .background(Color.sunFlowerDarker)
+                .foregroundColor(.black)
                 .accessibility(label: Text(R.string.localizable.minimum_temperature()))
                 .accessibility(value: Text("\(minTemperature)°"))
             
@@ -51,6 +52,7 @@ struct TemperatureHorizontalBarComponent: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .padding(8)
+                .foregroundColor(.black)
                 .accessibility(label: Text(R.string.localizable.maximum_temperature()))
                 .accessibility(value: Text("\(maxTemperature)°"))
         }

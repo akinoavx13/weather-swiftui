@@ -41,6 +41,7 @@ struct TemperatureVerticalBarComponent: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .padding(10)
+                .foregroundColor(.black)
             
             Spacer()
         }
