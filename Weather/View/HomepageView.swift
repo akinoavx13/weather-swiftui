@@ -61,7 +61,7 @@ struct HomepageView: ConnectedView {
                     
                     ReloadButtonComponent(lastUpdate: props.lastUpdate)
                     
-                    MadeByComponent()
+                    AppInformationComponent()
                 }
             }
         }
