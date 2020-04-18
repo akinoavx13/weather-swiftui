@@ -1,1 +1,2 @@
-
+Avec Weathery, vous retrouverez la température, la précipitation, le temps et les prévisions météorologiques.
+Accessible pour les personnes malvoyantes et aveugles.

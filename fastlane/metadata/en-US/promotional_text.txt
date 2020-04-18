@@ -1,1 +1,2 @@
-
+With Weathery, you will find temperature, precipitation, weather and weather forecasts.
+Accessible for the visually impaired and blind.
