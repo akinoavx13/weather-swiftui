@@ -1,1 +1,1 @@
-
+radar,pluie,météo,france,prévisions,soleil,nuage,été,fiable,uv,indice,polution,air,qualité,semaine

@@ -1,1 +1,26 @@
+When you want to have the weather, you want it to be fast, all the information you need on the home page?
 
+With Weathery, don't waste any more time finding information, or finding out what it means.
+Weathery will search weather data directly based on your location and display it instantly!
+
+Find in this application:
+
+* Current weather, temperature and feeling at your location.
+* The forecasts (temperature, weather) in the hours that follow.
+* The forecast (temperature, weather, precipitation) over the next 7 days.
+
+Weathery also supports the magnificent dark mode, but it is also 100% accessible for the visually impaired and blind.
+
+Find more features a little later!
+
+* Real-time alert (strong thunderstorm, intense rain, risk of tornado ...)
+* Rain radar
+* Map of temperatures, precipitation, clouds
+* Air quality
+* UV index
+* Widget
+* Weathery on Apple Watch, Mac and AppleTV
+* IMessage extension
+* And much more ...
+
+If you have any questions or concerns with the app, don't hesitate to contact me!

@@ -1,1 +1,26 @@
-L
+Quand vous souhaitez avoir la météo, vous voulez que ce soit rapide, que toutes les informations dont vous avez besoin soient sur la page d'accueil ?
+
+Avec Weathery, ne perdez plus de temps à trouver les informations, ou chercher à savoir ce quelles veulent dire.
+Weathery va chercher les données météo directement en fonction de votre emplacement et vous les affiche instantanément !
+
+Retrouver dans cette application :
+
+* Le temps, la température et le ressenti actuel à votre emplacement.
+* Les prévisions (température, temps) dans les heures qui suivent.
+* Les prévisions (température, temps, précipitation) sur les 7 prochains jours.
+
+Weathery supporte aussi le magnifique mode sombre, mais elle est aussi 100% accessible pour les personnes malvoyantes et aveugles.
+
+Retrouvez un peu plus tard encore plus de fonctionnalités !
+
+* Alerte en temps réel (fort orage, pluie intense, risque de tornade ...)
+* Radar de pluie
+* Carte des températures, précipitations, nuages
+* Qualité de l'air
+* Indice UV
+* Widget
+* Weathery sur Apple Watch, Mac et AppleTV
+* Extension iMessage
+* Et bien plus encore ...
+
+Si vous avez des questions ou des soucis avec l'application, n'hésitez pas à me contacter !
