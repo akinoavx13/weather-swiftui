@@ -33,3 +33,4 @@
 "tornado" = "Tornado";
 "reload" = "Reload";
 "last_update" = "Last update, %@";
+"made_by" = "Made with ❤️ by %@";

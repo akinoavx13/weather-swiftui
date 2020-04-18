@@ -60,6 +60,8 @@ struct HomepageView: ConnectedView {
                     Spacer()
                     
                     ReloadButtonComponent(lastUpdate: props.lastUpdate)
+                    
+                    MadeByComponent()
                 }
             }
         }
