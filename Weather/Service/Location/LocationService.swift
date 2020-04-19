@@ -7,14 +7,18 @@
 //
 
 import RxSwift
-import RxCocoa
 import CoreLocation
+
+enum LocationServiceError: Error {
+    case selfIsNil
+    case locationServicesNotEnabled
+}
 
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
     private let manager = CLLocationManager()
-    private var userLocation: PublishRelay<CLLocation> = .init()
+    private var userLocation: PublishSubject<CLLocation> = .init()
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -26,16 +30,22 @@ final class LocationService: NSObject, LocationServiceContract {
     
     // MARK: - Methods
     func getUserLocation() -> Single<CLLocation> {
-        if !CLLocationManager.locationServicesEnabled() {
-            return Single.never()
-        }
+        Single.create { [weak self] (single) in
+            guard let self = self else {
+                single(.error(LocationServiceError.selfIsNil))
+                
+                return Disposables.create()
+            }
         
-        return Single.create { [weak self] (single) in
-            guard let self = self else { return Disposables.create() }
-        
+            if !CLLocationManager.locationServicesEnabled() {
+                single(.error(LocationServiceError.locationServicesNotEnabled))
+            }
+            
             self.userLocation
                 .subscribe(onNext: { (location) in
                     single(.success(location))
+                }, onError: { (error) in
+                    single(.error(error))
                 })
                 .disposed(by: self.disposeBag)
             
@@ -61,9 +71,11 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            userLocation.accept(location)
+            userLocation.on(.next(location))
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) { }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        userLocation.on(.error(error))
+    }
 }

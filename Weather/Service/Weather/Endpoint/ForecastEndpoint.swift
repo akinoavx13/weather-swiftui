@@ -18,7 +18,7 @@ final class ForecastEndpoint: ApiEndpoint {
         let baseStringUrl = "https://api.darksky.net/forecast"
         
         guard
-            let request = DarkSkyRequest(baseStringUrl: "https://api.darksky.net/forecast",
+            let request = DarkSkyRequest(baseStringUrl: baseStringUrl,
                                          apiKey: DarkSky.apiKey,
                                          latitude: parameters.latitude,
                                          longitude: parameters.longitude,

@@ -21,6 +21,7 @@ struct HomepageView: ConnectedView {
         let weekForecastSummary: String
         let dailyForecasts: [DataForecast]
         let lastUpdate: Date
+        let error: WeatheryError?
     }
     
     // MARK: - Methods
@@ -34,7 +35,8 @@ struct HomepageView: ConnectedView {
               hourlyForecasts: state.weatherState.forecast?.hourly.data ?? [],
               weekForecastSummary: state.weatherState.forecast?.daily.summary ?? "",
               dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []),
-              lastUpdate: state.weatherState.lastUpdate)
+              lastUpdate: state.weatherState.lastUpdate,
+              error: state.weatherState.error)
     }
     
     // MARK: - Body
@@ -68,6 +70,11 @@ struct HomepageView: ConnectedView {
         .padding()
         .onAppear {
             store.dispatch(action: WeatherAction.FetchForecast())
+        }
+        .alert(isPresented: .constant(props.error != nil)) {
+            Alert(title: Text(props.error!.customTitle),
+                  message: Text(props.error!.customMessage),
+                  dismissButton: .default(Text(props.error!.actionTitle)))
         }
     }
 }

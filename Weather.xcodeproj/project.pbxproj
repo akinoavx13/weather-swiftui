@@ -65,6 +65,7 @@
 		52292B98244A003C00C8E3B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52292B9A244A003C00C8E3B2 /* InfoPlist.strings */; };
 		524802382445DA1400B6DE0D /* DailyForecastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524802372445DA1400B6DE0D /* DailyForecastComponent.swift */; };
 		526095B2244A421200CFE05B /* ReloadButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526095B1244A421200CFE05B /* ReloadButtonComponent.swift */; };
+		52AADC78244C57D60002FF83 /* WeatheryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AADC77244C57D60002FF83 /* WeatheryError.swift */; };
 		52B6E05D2445DC720090C44B /* TemperatureHorizontalBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6E05C2445DC720090C44B /* TemperatureHorizontalBarComponent.swift */; };
 		52D9DD172449856F00647079 /* LocationServiceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D9DD162449856F00647079 /* LocationServiceContract.swift */; };
 		52D9DD19244985E200647079 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D9DD18244985E200647079 /* LocationService.swift */; };
@@ -132,6 +133,7 @@
 		52292B9B244A003E00C8E3B2 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		524802372445DA1400B6DE0D /* DailyForecastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastComponent.swift; sourceTree = "<group>"; };
 		526095B1244A421200CFE05B /* ReloadButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadButtonComponent.swift; sourceTree = "<group>"; };
+		52AADC77244C57D60002FF83 /* WeatheryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatheryError.swift; sourceTree = "<group>"; };
 		52B6E05C2445DC720090C44B /* TemperatureHorizontalBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureHorizontalBarComponent.swift; sourceTree = "<group>"; };
 		52D9DD162449856F00647079 /* LocationServiceContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceContract.swift; sourceTree = "<group>"; };
 		52D9DD18244985E200647079 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 			children = (
 				5217EDA224450482006BEAE8 /* DarkSkyRequest.swift */,
 				5217EDA72445082D006BEAE8 /* DarkSky.swift */,
+				52AADC77244C57D60002FF83 /* WeatheryError.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				524802382445DA1400B6DE0D /* DailyForecastComponent.swift in Sources */,
 				5217ED5E2444FB46006BEAE8 /* Reachability.swift in Sources */,
 				5217ED5D2444FB46006BEAE8 /* ApiRequester.swift in Sources */,
+				52AADC78244C57D60002FF83 /* WeatheryError.swift in Sources */,
 				5217ED972444FED3006BEAE8 /* CurrentForecastComponent.swift in Sources */,
 				5217ED6A2444FB46006BEAE8 /* StoreConnector.swift in Sources */,
 				5217ED5F2444FB46006BEAE8 /* Request.swift in Sources */,

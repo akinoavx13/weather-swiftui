@@ -31,6 +31,8 @@ struct WeatherAction {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onSuccess: { (forecast) in
                     dispatch(SetForecast(forecast: forecast))
+                }, onError: { (error) in
+                    dispatch(SetError(error: error))
                 })
                 .disposed(by: FetchForecast.disposeBag)
         }
@@ -38,6 +40,10 @@ struct WeatherAction {
     
     struct SetForecast: Action {
         let forecast: Forecast
+    }
+    
+    struct SetError: Action {
+        let error: Error
     }
     
 }
