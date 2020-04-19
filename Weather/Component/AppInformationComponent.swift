@@ -13,7 +13,7 @@ struct AppInformationComponent: View {
         HStack {
             Spacer()
             
-            VStack {
+            VStack(alignment: .center, spacing: 4) {
                 Text(R.string.localizable.made_by("Maxime Maheo"))
                     .font(.caption)
                     .foregroundColor(.gray)

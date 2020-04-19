@@ -35,3 +35,8 @@
 "last_update" = "Last update, %@";
 "made_by" = "Made with ❤️ by %@";
 "data_provider" = "Data provided by Dark Sky.";
+"generic_error_title" = "An error occurred";
+"location_error_title" = "Location error occured";
+"generic_error_message" = "Something went wrong. Please try again later.";
+"location_error_message" = "We cannot find your location. Check your settings as well as exiting can solve the problem.";
+"error_action_title" = "Got it";

@@ -16,23 +16,23 @@ enum WeatheryError: LocalizedError {
     var customTitle: String {
         switch self {
         case .generic:
-            return "§Generic title"
+            return R.string.localizable.generic_error_title()
         case .locationError:
-            return "§Location title"
+            return R.string.localizable.location_error_title()
         }
     }
     
     var customMessage: String {
         switch self {
         case .generic:
-            return "§Generic message"
+            return R.string.localizable.generic_error_message()
         case .locationError:
-            return "§Location service message"
+            return R.string.localizable.location_error_message()
         }
     }
 
     var actionTitle: String {
-        "§Got it !"
+        R.string.localizable.error_action_title()
     }
     
     // MARK: - Lifecycle

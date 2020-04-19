@@ -47,17 +47,22 @@ struct HomepageView: ConnectedView {
                 if props.isLoading {
                     LoadingComponent()
                 } else {
-                    CurrentForecastComponent(temperature: props.temperature,
-                                             feelingTemperature: props.feelingTemperature,
-                                             icon: props.currentForecastIcon,
-                                             imageDescription: props.currentForecastDescription)
                     
-                    NextForecastComponent(hours: Int(Date().format(format: "HH")) ?? 0,
-                                          summary: props.nextForecastSummary,
-                                          hourlyForecasts: props.hourlyForecasts)
-                    
-                    WeekForecastComponent(summary: props.weekForecastSummary,
-                                          dailyForecasts: props.dailyForecasts)
+                    if props.error == nil {
+                        CurrentForecastComponent(temperature: props.temperature,
+                                                 feelingTemperature: props.feelingTemperature,
+                                                 icon: props.currentForecastIcon,
+                                                 imageDescription: props.currentForecastDescription)
+                        
+                        NextForecastComponent(hours: Int(Date().format(format: "HH")) ?? 0,
+                                              summary: props.nextForecastSummary,
+                                              hourlyForecasts: props.hourlyForecasts)
+                        
+                        WeekForecastComponent(summary: props.weekForecastSummary,
+                                              dailyForecasts: props.dailyForecasts)
+                    } else {
+                        ErrorComponent(message: props.error!.customMessage)
+                    }
                     
                     Spacer()
                     

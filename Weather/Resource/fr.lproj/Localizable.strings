@@ -35,3 +35,8 @@
 "last_update" = "Dernière mise à jour, %@";
 "made_by" = "Fait avec ❤️ par %@";
 "data_provider" = "Données fournit par Dark Sky.";
+"generic_error_title" = "Il y a eu un petit souci...";
+"location_error_title" = "Erreur de localisation";
+"generic_error_message" = "Une erreur est survenue, nous vous invitons à réessayer plus tard.";
+"location_error_message" = "Nous n'arrivons pas à trouver votre localisation. Vérifiez vos réglages ainsi que sortir peut résoudre le problème.";
+"error_action_title" = "J\'ai compris";
