@@ -22,6 +22,7 @@ struct HomepageView: ConnectedView {
         let dailyForecasts: [DataForecast]
         let lastUpdate: Date
         let error: WeatheryError?
+        let locality: String
     }
     
     // MARK: - Methods
@@ -36,7 +37,8 @@ struct HomepageView: ConnectedView {
               weekForecastSummary: state.weatherState.forecast?.daily.summary ?? "",
               dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []),
               lastUpdate: state.weatherState.lastUpdate,
-              error: state.weatherState.error)
+              error: state.weatherState.error,
+              locality: state.weatherState.locality)
     }
     
     // MARK: - Body
@@ -47,8 +49,9 @@ struct HomepageView: ConnectedView {
                 if props.isLoading {
                     LoadingComponent()
                 } else {
-                    
                     if props.error == nil {
+                        LocalityComponent(locality: props.locality)
+                        
                         CurrentForecastComponent(temperature: props.temperature,
                                                  feelingTemperature: props.feelingTemperature,
                                                  icon: props.currentForecastIcon,

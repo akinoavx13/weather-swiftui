@@ -12,5 +12,6 @@ import CoreLocation
 protocol LocationServiceContract {
         
     func getUserLocation() -> Single<CLLocation>
+    func getLocality() -> Single<String>
     
 }

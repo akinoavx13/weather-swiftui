@@ -13,4 +13,5 @@ struct WeatherState: ReduxState {
     var isLoading: Bool = false
     var lastUpdate: Date = Date()
     var error: WeatheryError?
+    var locality: String = ""
 }

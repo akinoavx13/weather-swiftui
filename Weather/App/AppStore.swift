@@ -16,6 +16,7 @@ let previewStore = Store<AppState>(reducer: appReducer,
                                                                                                  daily: DataForecasts.one,
                                                                                                  latitude: 44.837789,
                                                                                                  longitude: -0.57918),
-                                                                              isLoading: false)))
+                                                                              isLoading: false,
+                                                                              locality: "Bordeaux, France")))
 
 #endif

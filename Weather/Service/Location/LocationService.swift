@@ -18,7 +18,7 @@ final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
     private let manager = CLLocationManager()
-    private var userLocation: PublishSubject<CLLocation> = .init()
+    private var lastLocation: PublishSubject<CLLocation> = .init()
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -41,7 +41,7 @@ final class LocationService: NSObject, LocationServiceContract {
                 single(.error(LocationServiceError.locationServicesNotEnabled))
             }
             
-            self.userLocation
+            self.lastLocation
                 .subscribe(onNext: { (location) in
                     single(.success(location))
                 }, onError: { (error) in
@@ -53,6 +53,33 @@ final class LocationService: NSObject, LocationServiceContract {
                 self.manager.requestLocation()
             } else {
                 self.manager.requestWhenInUseAuthorization()
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func getLocality() -> Single<String> {
+        Single.create { [weak self] (single) in
+            guard let self = self else {
+                single(.error(LocationServiceError.selfIsNil))
+                return Disposables.create()
+            }
+        
+            if let lastLocation = self.manager.location {
+                let geocoder = CLGeocoder()
+                
+                geocoder
+                    .reverseGeocodeLocation(lastLocation) { (placemarks, error) in
+                        if error == nil {
+                            let firstLocation = placemarks?[0]
+                            let locality = "\(firstLocation?.locality ?? ""), \(firstLocation?.country ?? "")"
+                            
+                            single(.success(locality))
+                        } else {
+                            single(.error(error!))
+                        }
+                    }
             }
             
             return Disposables.create()
@@ -71,11 +98,11 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            userLocation.on(.next(location))
+            lastLocation.on(.next(location))
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        userLocation.on(.error(error))
+        lastLocation.on(.error(error))
     }
 }
