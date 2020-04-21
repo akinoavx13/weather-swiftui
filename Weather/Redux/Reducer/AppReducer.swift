@@ -10,6 +10,14 @@ func appReducer(state: AppState, action: Action) -> AppState {
     var state = state
     
     state.weatherState = weatherReducer(state: state.weatherState, action: action)
+    state.locationState = locationReducer(state: state.locationState, action: action)
+
+    switch action {
+    case let action as AppAction.SetError:
+        state.error = WeatheryError(error: action.error)
+    default:
+        break
+    }
     
     return state
 }

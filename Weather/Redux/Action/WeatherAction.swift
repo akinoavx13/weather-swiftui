@@ -35,17 +35,6 @@ struct WeatherAction {
                     dispatch(SetError(error: error))
                 })
                 .disposed(by: FetchForecast.disposeBag)
-            
-            locationService
-                .getLocality()
-                .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-                .observeOn(MainScheduler.instance)
-                .subscribe(onSuccess: {
-                    dispatch(SetLocality(locality: $0))
-                }, onError: {
-                    dispatch(SetError(error: $0))
-                })
-                .disposed(by: FetchForecast.disposeBag)
         }
     }
     
@@ -55,10 +44,6 @@ struct WeatherAction {
     
     struct SetError: Action {
         let error: Error
-    }
-    
-    struct SetLocality: Action {
-        let locality: String
     }
     
 }

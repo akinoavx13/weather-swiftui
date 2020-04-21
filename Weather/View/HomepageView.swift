@@ -23,7 +23,17 @@ struct HomepageView: ConnectedView {
         let lastUpdate: Date
         let error: WeatheryError?
         let locality: String
+        let latitude: Double
+        let longitude: Double
+        let precipitationAccumulation: Float
+        let precipitationIntensity: Float
+        let precipitationProbability: Float
+        let precipitationType: String
+        let pressure: Float
     }
+    
+    // MARK: - Properties
+    @State private var showInformationModel = false
     
     // MARK: - Methods
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
@@ -37,8 +47,15 @@ struct HomepageView: ConnectedView {
               weekForecastSummary: state.weatherState.forecast?.daily.summary ?? "",
               dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []),
               lastUpdate: state.weatherState.lastUpdate,
-              error: state.weatherState.error,
-              locality: state.weatherState.locality)
+              error: state.error,
+              locality: state.locationState.locality,
+              latitude: state.weatherState.forecast?.latitude ?? 0,
+              longitude: state.weatherState.forecast?.longitude ?? 0,
+              precipitationAccumulation: state.weatherState.forecast?.currently.precipAccumulation ?? 0,
+              precipitationIntensity: state.weatherState.forecast?.currently.precipIntensity ?? 0,
+              precipitationProbability: state.weatherState.forecast?.currently.precipProbability ?? 0,
+              precipitationType: state.weatherState.forecast?.currently.precipType ?? R.string.localizable.unknown(),
+              pressure: state.weatherState.forecast?.currently.pressure ?? 0)
     }
     
     // MARK: - Body
@@ -50,7 +67,8 @@ struct HomepageView: ConnectedView {
                     LoadingComponent()
                 } else {
                     if props.error == nil {
-                        LocalityComponent(locality: props.locality)
+                        LocalityComponent(showInformationModal: $showInformationModel,
+                                          locality: props.locality)
                         
                         CurrentForecastComponent(temperature: props.temperature,
                                                  feelingTemperature: props.feelingTemperature,
@@ -74,11 +92,22 @@ struct HomepageView: ConnectedView {
                     AppInformationComponent()
                 }
             }
+            .sheet(isPresented: $showInformationModel) {
+                InformationModelView(latitude: props.latitude,
+                                     longitude: props.longitude,
+                                     precipitationAccumulation: props.precipitationAccumulation,
+                                     precipitationIntensity: props.precipitationIntensity,
+                                     precipitationProbability: props.precipitationProbability,
+                                     precipitationType: props.precipitationType,
+                                     pressure: props.pressure)
+            }
         }
         .padding()
         .onAppear {
             store.dispatch(action: WeatherAction.FetchForecast())
+            store.dispatch(action: LocationAction.FetchLocality())
         }
+
         .alert(isPresented: .constant(props.error != nil)) {
             Alert(title: Text(props.error!.customTitle),
                   message: Text(props.error!.customMessage),

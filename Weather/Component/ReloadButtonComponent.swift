@@ -20,6 +20,7 @@ struct ReloadButtonComponent: View {
             
             Button(action: {
                 store.dispatch(action: WeatherAction.FetchForecast())
+                store.dispatch(action: LocationAction.FetchLocality())
             }, label: {
                 VStack {
                     HStack(alignment: .center) {

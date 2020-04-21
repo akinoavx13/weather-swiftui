@@ -7,8 +7,7 @@ target 'Weather' do
 
   # Pods for Weather
   pod 'Firebase/Crashlytics'
-
-  # Recommended: Add the Firebase pod for Google Analytics
+  pod 'Firebase/Performance'
   pod 'Firebase/Analytics'
 
 end

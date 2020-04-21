@@ -11,14 +11,27 @@ import SwiftUI
 struct LocalityComponent: View {
     
     // MARK: - Properties
+    @Binding var showInformationModal: Bool
     var locality: String
     
     // MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(locality)
-                .font(.headline)
-                .foregroundColor(.sunFlower)
+            
+            HStack {
+                Text(locality)
+                    .font(.headline)
+                    .foregroundColor(.sunFlower)
+                
+                Spacer()
+                
+                Button(action: {
+                    self.showInformationModal.toggle()
+                }, label: {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.sunFlower)
+                })
+            }
             
             Rectangle()
                 .fill(Color.sunFlower)
@@ -29,6 +42,7 @@ struct LocalityComponent: View {
 
 struct LocalityComponent_Previews: PreviewProvider {
     static var previews: some View {
-        LocalityComponent(locality: "Bordeaux, France")
+        LocalityComponent(showInformationModal: .constant(false),
+                          locality: "Bordeaux, France")
     }
 }

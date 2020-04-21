@@ -19,10 +19,8 @@ func weatherReducer(state: WeatherState, action: Action) -> WeatherState {
         state.lastUpdate = Date()
         state.isLoading = false
     case let action as WeatherAction.SetError:
-        state.error = WeatheryError(error: action.error)
         state.isLoading = false
-    case let action as WeatherAction.SetLocality:
-        state.locality = action.locality
+        store.dispatch(action: AppAction.SetError(error: action.error))
     default:
         break
     }

@@ -40,3 +40,5 @@
 "generic_error_message" = "Something went wrong. Please try again later.";
 "location_error_message" = "We cannot find your location. Check your settings as well as exiting can solve the problem.";
 "error_action_title" = "Got it";
+"more_information" = "More information";
+"unknown" = "unknown";

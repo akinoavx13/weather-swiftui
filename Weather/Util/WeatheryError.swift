@@ -39,7 +39,7 @@ enum WeatheryError: LocalizedError {
     init(error: Error) {
         if let locationError = error as? LocationServiceError {
             switch locationError {
-            case .locationServicesNotEnabled:
+            case .locationServicesNotEnabled, .noLocation:
                 self = .locationError
             case .selfIsNil:
                 self = .generic

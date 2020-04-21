@@ -12,6 +12,7 @@ import CoreLocation
 enum LocationServiceError: Error {
     case selfIsNil
     case locationServicesNotEnabled
+    case noLocation
 }
 
 final class LocationService: NSObject, LocationServiceContract {
@@ -65,17 +66,20 @@ final class LocationService: NSObject, LocationServiceContract {
                 single(.error(LocationServiceError.selfIsNil))
                 return Disposables.create()
             }
-        
+                    
             if let lastLocation = self.manager.location {
                 let geocoder = CLGeocoder()
                 
                 geocoder
                     .reverseGeocodeLocation(lastLocation) { (placemarks, error) in
                         if error == nil {
-                            let firstLocation = placemarks?[0]
-                            let locality = "\(firstLocation?.locality ?? ""), \(firstLocation?.country ?? "")"
-                            
-                            single(.success(locality))
+                            if let firstLocation = placemarks?[0] {
+                                let locality = "\(firstLocation.locality ?? ""), \(firstLocation.country ?? "")"
+                                
+                                single(.success(locality))
+                            } else {
+                                single(.error(LocationServiceError.noLocation))
+                            }
                         } else {
                             single(.error(error!))
                         }

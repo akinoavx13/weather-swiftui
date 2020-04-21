@@ -8,4 +8,6 @@
 
 struct AppState: ReduxState {
     var weatherState = WeatherState()
+    var locationState = LocationState()
+    var error: WeatheryError?
 }
