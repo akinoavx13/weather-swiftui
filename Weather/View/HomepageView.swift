@@ -105,7 +105,6 @@ struct HomepageView: ConnectedView {
         .padding()
         .onAppear {
             store.dispatch(action: WeatherAction.FetchForecast())
-            store.dispatch(action: LocationAction.FetchLocality())
         }
 
         .alert(isPresented: .constant(props.error != nil)) {

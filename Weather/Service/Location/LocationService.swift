@@ -12,15 +12,15 @@ import CoreLocation
 enum LocationServiceError: Error {
     case selfIsNil
     case locationServicesNotEnabled
-    case noLocation
+    case cannotProvideLocality
 }
 
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
     private let manager = CLLocationManager()
-    private var lastLocation: PublishSubject<CLLocation> = .init()
-    private let disposeBag = DisposeBag()
+    private var location: PublishSubject<CLLocation> = .init()
+    private var disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     override init() {
@@ -31,20 +31,22 @@ final class LocationService: NSObject, LocationServiceContract {
     
     // MARK: - Methods
     func getUserLocation() -> Single<CLLocation> {
-        Single.create { [weak self] (single) in
+        if !CLLocationManager.locationServicesEnabled() {
+            return Single.error(LocationServiceError.locationServicesNotEnabled)
+        }
+                
+        return Single.create { [weak self] (single) in
             guard let self = self else {
                 single(.error(LocationServiceError.selfIsNil))
-                
+
                 return Disposables.create()
             }
-        
-            if !CLLocationManager.locationServicesEnabled() {
-                single(.error(LocationServiceError.locationServicesNotEnabled))
-            }
             
-            self.lastLocation
-                .subscribe(onNext: { (location) in
+            self.location
+                .subscribe(onNext: { [weak self] (location) in
                     single(.success(location))
+                    
+                    self?.disposeBag = DisposeBag()
                 }, onError: { (error) in
                     single(.error(error))
                 })
@@ -61,34 +63,34 @@ final class LocationService: NSObject, LocationServiceContract {
     }
     
     func getLocality() -> Single<String> {
-        Single.create { [weak self] (single) in
-            guard let self = self else {
-                single(.error(LocationServiceError.selfIsNil))
-                return Disposables.create()
-            }
-                    
-            if let lastLocation = self.manager.location {
-                let geocoder = CLGeocoder()
-                
-                geocoder
-                    .reverseGeocodeLocation(lastLocation) { (placemarks, error) in
-                        if error == nil {
-                            if let firstLocation = placemarks?[0] {
-                                let locality = "\(firstLocation.locality ?? ""), \(firstLocation.country ?? "")"
-                                
-                                single(.success(locality))
-                            } else {
-                                single(.error(LocationServiceError.noLocation))
-                            }
-                        } else {
-                            single(.error(error!))
-                        }
+        getUserLocation()
+            .flatMap { self.convertLocationToLocality(location: $0) }
+    }
+       
+    // MARK: - Methods
+    private func convertLocationToLocality(location: CLLocation) -> Single<String> {
+        Single.create { (single) in
+            CLGeocoder()
+                .reverseGeocodeLocation(location) { (placemarks, error) in
+                    guard error == nil else {
+                        return single(.error(error!))
                     }
-            }
+                    
+                    guard
+                        let firstPlacemark = placemarks?[0],
+                        let locality = firstPlacemark.locality,
+                        let country = firstPlacemark.country
+                    else {
+                        return single(.error(LocationServiceError.cannotProvideLocality))
+                    }
+                                        
+                    single(.success("\(locality), \(country)"))
+                }
             
             return Disposables.create()
         }
     }
+        
 }
 
 extension LocationService: CLLocationManagerDelegate {
@@ -96,17 +98,17 @@ extension LocationService: CLLocationManagerDelegate {
         if status == .denied || status == .notDetermined || status == .restricted {
             manager.requestWhenInUseAuthorization()
         } else {
-            manager.requestLocation()
+            store.dispatch(action: WeatherAction.FetchForecast())
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            lastLocation.on(.next(location))
+            self.location.on(.next(location))
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        lastLocation.on(.error(error))
+        location.on(.error(error))
     }
 }

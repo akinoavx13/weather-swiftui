@@ -14,6 +14,7 @@ func weatherReducer(state: WeatherState, action: Action) -> WeatherState {
     switch action {
     case _ as WeatherAction.FetchForecast:
         state.isLoading = true
+        store.dispatch(action: LocationAction.FetchLocality())
     case let action as WeatherAction.SetForecast:
         state.forecast = action.forecast
         state.lastUpdate = Date()
