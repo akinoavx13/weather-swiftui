@@ -48,9 +48,13 @@ struct ReloadButtonComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ReloadButtonComponent(lastUpdate: Date())
+                .environmentObject(WeatherViewModel())
+                .environmentObject(LocationViewModel())
                 .environment(\.colorScheme, .light)
             
             ReloadButtonComponent(lastUpdate: Date())
+                .environmentObject(WeatherViewModel())
+                .environmentObject(LocationViewModel())
                 .environment(\.colorScheme, .dark)
         }
         

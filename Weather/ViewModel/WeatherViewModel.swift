@@ -14,7 +14,7 @@ final class WeatherViewModel: ObservableObject {
     
     // MARK: - Properties
     @Published var forecast: Forecast?
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var lastUpdate: Date = Date()
     @Published var error: WeatheryError?
     

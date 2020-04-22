@@ -77,8 +77,12 @@ struct HomepageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HomepageView()
+                .environmentObject(WeatherViewModel())
+                .environmentObject(LocationViewModel())
             
             HomepageView()
+                .environmentObject(WeatherViewModel())
+                .environmentObject(LocationViewModel())
                 .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
         }
     }
