@@ -11,9 +11,12 @@ import SwiftUI
 struct NextForecastComponent: View {
     
     // MARK: - Properties
-    var hours: Int
     var summary: String
     var hourlyForecasts: [DataForecast]
+    
+    private var hours: Int {
+        Int(Date().format(format: "HH")) ?? 0
+    }
     
     private var title: String {
         if hours >= 0 && hours <= 6 || hours >= 23 && hours <= 24 {
@@ -53,8 +56,7 @@ struct NextForecastComponent: View {
 
 struct NextForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
-        NextForecastComponent(hours: 7,
-                              summary: "Clear skies all day.",
+        NextForecastComponent(summary: "Clear skies all day.",
                               hourlyForecasts: DataForecast.list)
     }
 }

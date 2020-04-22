@@ -11,6 +11,9 @@ import SwiftUI
 struct ReloadButtonComponent: View {
     
     // MARK: - Properties
+    @EnvironmentObject private var weatherViewModel: WeatherViewModel
+    @EnvironmentObject private var locationViewModel: LocationViewModel
+    
     var lastUpdate: Date
     
     // MARK: - Body
@@ -19,7 +22,8 @@ struct ReloadButtonComponent: View {
             Spacer()
             
             Button(action: {
-                store.dispatch(action: WeatherAction.FetchForecast())
+                self.weatherViewModel.fetchForecast()
+                self.locationViewModel.fetchLocality()
             }, label: {
                 VStack {
                     HStack(alignment: .center) {

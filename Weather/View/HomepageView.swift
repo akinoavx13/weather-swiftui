@@ -8,109 +8,65 @@
 
 import SwiftUI
 
-struct HomepageView: ConnectedView {
-    
-    struct Props {
-        let isLoading: Bool
-        let temperature: Int
-        let feelingTemperature: Int
-        let currentForecastIcon: UIImage?
-        let currentForecastDescription: String
-        let nextForecastSummary: String
-        let hourlyForecasts: [DataForecast]
-        let weekForecastSummary: String
-        let dailyForecasts: [DataForecast]
-        let lastUpdate: Date
-        let error: WeatheryError?
-        let locality: String
-        let latitude: Double
-        let longitude: Double
-        let precipitationAccumulation: Float
-        let precipitationIntensity: Float
-        let precipitationProbability: Float
-        let precipitationType: String
-        let pressure: Float
-    }
-    
+struct HomepageView: View {
+
     // MARK: - Properties
+    @EnvironmentObject private var weatherViewModel: WeatherViewModel
+    @EnvironmentObject private var locationViewModel: LocationViewModel
+    
     @State private var showInformationModel = false
     
-    // MARK: - Methods
-    func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        Props(isLoading: state.weatherState.isLoading,
-              temperature: Int(state.weatherState.forecast?.currently.temperature ?? 0),
-              feelingTemperature: Int(state.weatherState.forecast?.currently.apparentTemperature ?? 0),
-              currentForecastIcon: state.weatherState.forecast?.currently.imageIcon,
-              currentForecastDescription: state.weatherState.forecast?.currently.icon ?? "",
-              nextForecastSummary: state.weatherState.forecast?.hourly.summary ?? "",
-              hourlyForecasts: state.weatherState.forecast?.hourly.data ?? [],
-              weekForecastSummary: state.weatherState.forecast?.daily.summary ?? "",
-              dailyForecasts: Array(state.weatherState.forecast?.daily.data.prefix(7) ?? []),
-              lastUpdate: state.weatherState.lastUpdate,
-              error: state.error,
-              locality: state.locationState.locality,
-              latitude: state.weatherState.forecast?.latitude ?? 0,
-              longitude: state.weatherState.forecast?.longitude ?? 0,
-              precipitationAccumulation: state.weatherState.forecast?.currently.precipAccumulation ?? 0,
-              precipitationIntensity: state.weatherState.forecast?.currently.precipIntensity ?? 0,
-              precipitationProbability: state.weatherState.forecast?.currently.precipProbability ?? 0,
-              precipitationType: state.weatherState.forecast?.currently.precipType ?? R.string.localizable.unknown(),
-              pressure: state.weatherState.forecast?.currently.pressure ?? 0)
-    }
-    
     // MARK: - Body
-    func body(props: Props) -> some View {
+    var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
-                
-                if props.isLoading {
+                if weatherViewModel.isLoading {
                     LoadingComponent()
                 } else {
-                    if props.error == nil {
-                        LocalityComponent(showInformationModal: $showInformationModel,
-                                          locality: props.locality)
+                    if weatherViewModel.error == nil {
+                        if locationViewModel.error == nil {
+                            LocalityComponent(showInformationModal: $showInformationModel,
+                                              locality: locationViewModel.locality)
+                        }
                         
-                        CurrentForecastComponent(temperature: props.temperature,
-                                                 feelingTemperature: props.feelingTemperature,
-                                                 icon: props.currentForecastIcon,
-                                                 imageDescription: props.currentForecastDescription)
+                        CurrentForecastComponent(temperature: Int(weatherViewModel.forecast?.currently.temperature ?? 0),
+                                                 feelingTemperature: Int(weatherViewModel.forecast?.currently.apparentTemperature ?? 0),
+                                                 icon: weatherViewModel.forecast?.currently.imageIcon,
+                                                 imageDescription: weatherViewModel.forecast?.currently.icon ?? "")
                         
-                        NextForecastComponent(hours: Int(Date().format(format: "HH")) ?? 0,
-                                              summary: props.nextForecastSummary,
-                                              hourlyForecasts: props.hourlyForecasts)
-                        
-                        WeekForecastComponent(summary: props.weekForecastSummary,
-                                              dailyForecasts: props.dailyForecasts)
-                    } else {
-                        ErrorComponent(message: props.error!.customMessage)
+                        NextForecastComponent(summary: weatherViewModel.forecast?.hourly.summary ?? "",
+                                              hourlyForecasts: weatherViewModel.forecast?.hourly.data ?? [])
+
+                        WeekForecastComponent(summary: weatherViewModel.forecast?.daily.summary ?? "",
+                                              dailyForecasts: Array(weatherViewModel.forecast?.daily.data.prefix(7) ?? []))
                     }
                     
                     Spacer()
-                    
-                    ReloadButtonComponent(lastUpdate: props.lastUpdate)
-                    
+
+                    ReloadButtonComponent(lastUpdate: weatherViewModel.lastUpdate)
+
                     AppInformationComponent()
                 }
-            }
-            .sheet(isPresented: $showInformationModel) {
-                InformationModelView(latitude: props.latitude,
-                                     longitude: props.longitude,
-                                     precipitationAccumulation: props.precipitationAccumulation,
-                                     precipitationIntensity: props.precipitationIntensity,
-                                     precipitationProbability: props.precipitationProbability,
-                                     precipitationType: props.precipitationType,
-                                     pressure: props.pressure)
             }
         }
         .padding()
         .onAppear {
-            store.dispatch(action: WeatherAction.FetchForecast())
+            self.weatherViewModel.fetchForecast()
+            self.locationViewModel.fetchLocality()
         }
-
-        .alert(isPresented: .constant(props.error != nil)) {
-            Alert(title: Text(props.error!.customTitle),
-                  message: Text(props.error!.customMessage),
-                  dismissButton: .default(Text(props.error!.actionTitle)))
+        .sheet(isPresented: $showInformationModel) {
+            InformationModelView(latitude: self.weatherViewModel.forecast?.latitude ?? 0,
+                                 longitude: self.weatherViewModel.forecast?.longitude ?? 0,
+                                 precipitationAccumulation: self.weatherViewModel.forecast?.currently.precipAccumulation ?? 0,
+                                 precipitationIntensity: self.weatherViewModel.forecast?.currently.precipIntensity ?? 0,
+                                 precipitationProbability: self.weatherViewModel.forecast?.currently.precipProbability ?? 0,
+                                 precipitationType: self.weatherViewModel.forecast?.currently.precipType ?? "",
+                                 pressure: self.weatherViewModel.forecast?.currently.pressure ?? 0)
+        }
+        .alert(isPresented: .constant(weatherViewModel.error != nil)) {
+            Alert(title: Text(weatherViewModel.error!.customTitle),
+                  message: Text(weatherViewModel.error!.customMessage),
+                  dismissButton: .default(Text(weatherViewModel.error!.actionTitle)))
         }
     }
 }
@@ -121,10 +77,8 @@ struct HomepageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HomepageView()
-                .environmentObject(previewStore)
             
             HomepageView()
-                .environmentObject(previewStore)
                 .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
         }
     }

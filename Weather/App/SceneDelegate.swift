@@ -22,12 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         AppDependency.shared.registerServices()
         
+        let homepageView = HomepageView()
+            .environmentObject(WeatherViewModel())
+            .environmentObject(LocationViewModel())
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: StoreProvider(store: store, content: {
-                HomepageView()
-            }))
+            window.rootViewController = UIHostingController(rootView: homepageView)
             self.window = window
             window.makeKeyAndVisible()
         }

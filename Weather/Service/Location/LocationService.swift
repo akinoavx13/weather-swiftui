@@ -94,13 +94,7 @@ final class LocationService: NSObject, LocationServiceContract {
 }
 
 extension LocationService: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .denied || status == .notDetermined || status == .restricted {
-            manager.requestWhenInUseAuthorization()
-        } else {
-            store.dispatch(action: WeatherAction.FetchForecast())
-        }
-    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) { }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
