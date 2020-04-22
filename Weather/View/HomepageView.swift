@@ -52,7 +52,7 @@ struct HomepageView: View {
                                  precipitationAccumulation: self.weatherViewModel.forecast?.currently.precipAccumulation ?? 0,
                                  precipitationIntensity: self.weatherViewModel.forecast?.currently.precipIntensity ?? 0,
                                  precipitationProbability: self.weatherViewModel.forecast?.currently.precipProbability ?? 0,
-                                 precipitationType: self.weatherViewModel.forecast?.currently.precipType ?? "",
+                                 precipitationType: self.weatherViewModel.forecast?.currently.precipType ?? R.string.localizable.unknown(),
                                  pressure: self.weatherViewModel.forecast?.currently.pressure ?? 0)
         }
         .alert(isPresented: .constant(weatherViewModel.error != nil)) {

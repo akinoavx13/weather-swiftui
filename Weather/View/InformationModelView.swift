@@ -21,48 +21,62 @@ struct InformationModelView: View {
     
     // MARK: - Body
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(R.string.localizable.more_information())
-                .font(.title)
-                .fontWeight(.bold)
-                .padding()
-            
+        NavigationView {
             VStack(alignment: .leading) {
-                Text("Coordinates")
-                    .font(.caption)
                 
-                MoreInformationRowComponent(title: "Latitude",
-                                            value: "\(latitude)")
+                makeCoordinatesView()
                 
-                MoreInformationRowComponent(title: "Longitude",
-                                            value: "\(longitude)")
+                makePrecipitationView()
+                
+                makePressureView()
+
+                Spacer()
             }
-            .sectionStyle()
-            
-            VStack(alignment: .leading) {
-                Text("Precipitation")
-                    .font(.caption)
-                
-                MoreInformationRowComponent(title: "Accumulation",
-                                            value: "\(precipitationAccumulation * 10) mm")
-                
-                MoreInformationRowComponent(title: "Intensity",
-                                            value: "\(precipitationIntensity) mm/h")
-                
-                MoreInformationRowComponent(title: "Probability",
-                                            value: "\(precipitationProbability * 100) %")
-                
-                MoreInformationRowComponent(title: "Type",
-                                            value: precipitationType)
-            }
-            .sectionStyle()
-            
-            MoreInformationRowComponent(title: "Pressure",
-                                        value: "\(pressure) hPa")
-                .sectionStyle()
-            
-            Spacer()
+            .navigationBarTitle(Text(R.string.localizable.more_information()))
         }
+    }
+}
+
+extension InformationModelView {
+    
+    private func makeCoordinatesView() -> some View {
+        VStack(alignment: .leading) {
+            Text(R.string.localizable.coordinates())
+                .font(.caption)
+            
+            MoreInformationRowComponent(title: R.string.localizable.latitude(),
+                                        value: "\(latitude)")
+            
+            MoreInformationRowComponent(title: R.string.localizable.longitude(),
+                                        value: "\(longitude)")
+        }
+        .sectionStyle()
+    }
+    
+    private func makePrecipitationView() -> some View {
+        VStack(alignment: .leading) {
+            Text(R.string.localizable.precipication())
+                .font(.caption)
+            
+            MoreInformationRowComponent(title: R.string.localizable.accumulation(),
+                                        value: "\(precipitationAccumulation * 10) mm")
+            
+            MoreInformationRowComponent(title: R.string.localizable.intensity(),
+                                        value: "\(precipitationIntensity) mm/h")
+            
+            MoreInformationRowComponent(title: R.string.localizable.probability(),
+                                        value: "\(precipitationProbability * 100) %")
+            
+            MoreInformationRowComponent(title: R.string.localizable.type(),
+                                        value: precipitationType)
+        }
+        .sectionStyle()
+    }
+    
+    private func makePressureView() -> some View {
+        MoreInformationRowComponent(title: R.string.localizable.pressure(),
+                                value: "\(pressure) hPa")
+        .sectionStyle()
     }
 }
 

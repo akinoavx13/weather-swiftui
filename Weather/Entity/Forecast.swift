@@ -36,8 +36,8 @@ struct DataForecast: Codable, Identifiable {
     let precipType: String?
     let pressure: Float
     let summary: String
-    var sunriseTime: Double?
-    var sunsetTime: Double?
+    var sunriseTime: TimeInterval?
+    var sunsetTime: TimeInterval?
     var temperature: Float?
     var temperatureMax: Float?
     var temperatureMin: Float?

@@ -42,3 +42,12 @@
 "error_action_title" = "Got it";
 "more_information" = "More information";
 "unknown" = "unknown";
+"coordinates" = "Coordinates";
+"latitude" = "Latitude";
+"longitude" = "Longitude";
+"accumulation" = "Accumulation";
+"intensity" = "Intensity";
+"probability" = "Probability";
+"type" = "Type";
+"pressure" = "Pressure";
+

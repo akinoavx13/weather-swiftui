@@ -42,3 +42,11 @@
 "error_action_title" = "J\'ai compris";
 "more_information" = "Plus d'informations";
 "unknown" = "Inconnue";
+"coordinates" = "Coordonnées";
+"latitude" = "Latitude";
+"longitude" = "Longitude";
+"accumulation" = "Accumulation";
+"intensity" = "Intensité";
+"probability" = "Probabilité";
+"type" = "Type";
+"pressure" = "Pression";
