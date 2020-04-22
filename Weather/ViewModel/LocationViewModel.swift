@@ -14,7 +14,6 @@ final class LocationViewModel: ObservableObject {
     
     // MARK: - Properties
     @Published var locality: String = ""
-    @Published var error: WeatheryError?
 
     private var locationService: LocationServiceContract
     
@@ -27,18 +26,23 @@ final class LocationViewModel: ObservableObject {
         }
                 
         self.locationService = locationService
+        
+        bindLocation()
     }
     
     // MARK: - Methods
-    func fetchLocality() {
+    func refreshLocation() {
+        locationService.refreshLocation()
+    }
+    
+    // MARK: - Private methods
+    private func bindLocation() {
         locationService
-            .getLocality()
+            .locality
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] (locality) in
+            .subscribe(onNext: { [weak self] (locality) in
                 self?.locality = locality
-            }, onError: { [weak self] (error) in
-                self?.error = WeatheryError(error: error)
             })
             .disposed(by: disposeBag)
     }

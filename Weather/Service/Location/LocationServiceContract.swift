@@ -10,8 +10,12 @@ import RxSwift
 import CoreLocation
 
 protocol LocationServiceContract {
-        
-    func getUserLocation() -> Single<CLLocation>
-    func getLocality() -> Single<String>
     
+    // MARK: - Properties
+    var location: PublishSubject<CLLocation> { get }
+    var locality: BehaviorSubject<String> { get }
+    
+    // MARK: - Methods
+    func refreshLocation()
+
 }

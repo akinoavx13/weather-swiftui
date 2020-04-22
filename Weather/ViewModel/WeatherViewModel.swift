@@ -34,28 +34,39 @@ final class WeatherViewModel: ObservableObject {
                 
         self.weatherService = weatherService
         self.locationService = locationService
+        
+        bindLocation()
     }
     
-    // MARK: - Methods
-    func fetchForecast() {
+    // MARK: - Private methods
+    private func bindLocation() {
         locationService
-            .getUserLocation()
-            .flatMap { self.weatherService.forecast(latitude: $0.coordinate.latitude,
-                                                    longitude: $0.coordinate.longitude) }
+            .location
+            .subscribe(onNext: { [weak self] (location) in
+                self?.fetchForecast(latitude: location.coordinate.longitude, longitude: location.coordinate.longitude)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func fetchForecast(latitude: Double, longitude: Double) {
+        isLoading = true
+        error = nil
+        
+        weatherService
+            .forecast(latitude: latitude, longitude: longitude)
             .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
-            .do(onSuccess: { [weak self] (_) in
-                self?.isLoading = false
-                self?.lastUpdate = Date()
-            }, onError: { [weak self] (_) in
-                self?.isLoading = false
-            }, onSubscribe: { [weak self] in
-                self?.isLoading = true
-            })
             .subscribe(onSuccess: { [weak self] (forecast) in
-                self?.forecast = forecast
+                guard let self = self else { return }
+                
+                self.forecast = forecast
+                self.isLoading = false
+                self.lastUpdate = Date()
             }, onError: { [weak self] (error) in
-                self?.error = WeatheryError(error: error)
+                guard let self = self else { return }
+                
+                self.isLoading = false
+                self.error = WeatheryError(error: error)
             })
             .disposed(by: disposeBag)
     }

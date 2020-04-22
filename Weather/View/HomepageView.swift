@@ -24,10 +24,8 @@ struct HomepageView: View {
                     LoadingComponent()
                 } else {
                     if weatherViewModel.error == nil {
-                        if locationViewModel.error == nil {
-                            LocalityComponent(showInformationModal: $showInformationModel,
-                                              locality: locationViewModel.locality)
-                        }
+                        LocalityComponent(showInformationModal: $showInformationModel,
+                                          locality: locationViewModel.locality)
                         
                         CurrentForecastComponent(temperature: Int(weatherViewModel.forecast?.currently.temperature ?? 0),
                                                  feelingTemperature: Int(weatherViewModel.forecast?.currently.apparentTemperature ?? 0),
@@ -50,10 +48,6 @@ struct HomepageView: View {
             }
         }
         .padding()
-        .onAppear {
-            self.weatherViewModel.fetchForecast()
-            self.locationViewModel.fetchLocality()
-        }
         .sheet(isPresented: $showInformationModel) {
             InformationModelView(latitude: self.weatherViewModel.forecast?.latitude ?? 0,
                                  longitude: self.weatherViewModel.forecast?.longitude ?? 0,

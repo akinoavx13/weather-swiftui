@@ -18,8 +18,10 @@ enum LocationServiceError: Error {
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
+    var location: PublishSubject<CLLocation> = .init()
+    var locality: BehaviorSubject<String> = .init(value: "")
+    
     private let manager = CLLocationManager()
-    private var location: PublishSubject<CLLocation> = .init()
     private var disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -27,78 +29,47 @@ final class LocationService: NSObject, LocationServiceContract {
         super.init()
         
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
     }
     
-    // MARK: - Methods
-    func getUserLocation() -> Single<CLLocation> {
-        if !CLLocationManager.locationServicesEnabled() {
-            return Single.error(LocationServiceError.locationServicesNotEnabled)
-        }
+    func refreshLocation() {
+        manager.stopUpdatingLocation()
+        manager.startUpdatingLocation()
+    }
+    
+    // MARK: - Private methods
+    private func convertLocationToLocality(location: CLLocation) {
+        CLGeocoder()
+            .reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+                guard let self = self else { return }
                 
-        return Single.create { [weak self] (single) in
-            guard let self = self else {
-                single(.error(LocationServiceError.selfIsNil))
-
-                return Disposables.create()
-            }
-            
-            self.location
-                .subscribe(onNext: { [weak self] (location) in
-                    single(.success(location))
-                    
-                    self?.disposeBag = DisposeBag()
-                }, onError: { (error) in
-                    single(.error(error))
-                })
-                .disposed(by: self.disposeBag)
-            
-            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-                self.manager.requestLocation()
-            } else {
-                self.manager.requestWhenInUseAuthorization()
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func getLocality() -> Single<String> {
-        getUserLocation()
-            .flatMap { self.convertLocationToLocality(location: $0) }
-    }
-       
-    // MARK: - Methods
-    private func convertLocationToLocality(location: CLLocation) -> Single<String> {
-        Single.create { (single) in
-            CLGeocoder()
-                .reverseGeocodeLocation(location) { (placemarks, error) in
-                    guard error == nil else {
-                        return single(.error(error!))
-                    }
-                    
-                    guard
-                        let firstPlacemark = placemarks?[0],
-                        let locality = firstPlacemark.locality,
-                        let country = firstPlacemark.country
-                    else {
-                        return single(.error(LocationServiceError.cannotProvideLocality))
-                    }
-                                        
-                    single(.success("\(locality), \(country)"))
+                if error != nil {
+                    return self.locality.onError(error!)
                 }
-            
-            return Disposables.create()
-        }
+                
+                guard
+                    let firstPlacemark = placemarks?[0],
+                    let locality = firstPlacemark.locality,
+                    let country = firstPlacemark.country
+                else {
+                    return self.locality.onError(LocationServiceError.cannotProvideLocality)
+                }
+                
+                self.locality.onNext("\(locality), \(country)")
+            }
     }
-        
+
 }
 
 extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) { }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
+        if let location = locations.last {
             self.location.on(.next(location))
+            convertLocationToLocality(location: location)
         }
     }
 
