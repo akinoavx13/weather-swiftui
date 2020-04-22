@@ -1,1 +1,1 @@
-
+Dans cette mise à jour, vous trouverez une amélioration de la performance de l'application, des corrections de bugs ainsi que l'ajout d'un écran affichant plus d'informations (en cours de développement).

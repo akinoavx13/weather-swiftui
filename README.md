@@ -26,7 +26,7 @@ Accessible weather app for the blind and visually impaired
 ## Todo
 
 - [x] Errors handling
-- [ ] Show your location name
+- [x] Show your location name
 - [ ] Information sheet (Air quality, UV ...)
 - [ ] Map with temperatures, precipitation, clouds
 - [ ] Widget
