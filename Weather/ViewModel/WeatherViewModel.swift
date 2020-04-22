@@ -20,7 +20,7 @@ final class WeatherViewModel: ObservableObject {
     private var weatherService: WeatherServiceContract
     private var locationService: LocationServiceContract
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     init() {
@@ -35,6 +35,7 @@ final class WeatherViewModel: ObservableObject {
         self.locationService = locationService
         
         bindLocation()
+        bindLocationError()
     }
     
     // MARK: - Private methods
@@ -42,10 +43,17 @@ final class WeatherViewModel: ObservableObject {
         locationService
             .location
             .subscribe(onNext: { [weak self] (location) in
-                if let location = location {
-                    self?.fetchForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                }
-            }, onError: { [weak self] (error) in
+                self?.fetchForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindLocationError() {
+        locationService
+            .error
+            .unwrap()
+            .asDriver(onErrorJustReturn: WeatheryError.generic)
+            .drive(onNext: { [weak self] (error) in
                 guard let self = self else { return }
 
                 self.error = WeatheryError(error: error)

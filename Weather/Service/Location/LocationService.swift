@@ -8,6 +8,7 @@
 
 import RxSwift
 import CoreLocation
+import RxCocoa
 
 enum LocationServiceError: Error {
     case selfIsNil
@@ -18,8 +19,9 @@ enum LocationServiceError: Error {
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
-    var location: BehaviorSubject<CLLocation?> = .init(value: nil)
-    var locality: BehaviorSubject<String> = .init(value: "")
+    var location: PublishRelay<CLLocation> = .init()
+    var locality: PublishRelay<String> = .init()
+    var error: BehaviorRelay<Error?> = .init(value: nil)
     
     private let manager = CLLocationManager()
     private var disposeBag = DisposeBag()
@@ -41,8 +43,6 @@ final class LocationService: NSObject, LocationServiceContract {
     
     func stopUpdatingLocation() {
         manager.stopUpdatingLocation()
-        locality.onNext("")
-        location.onNext(nil)
     }
     
     // MARK: - Private methods
@@ -52,18 +52,19 @@ final class LocationService: NSObject, LocationServiceContract {
                 guard let self = self else { return }
                 
                 if error != nil {
-                    return self.locality.onError(error!)
+                    return self.error.accept(error!)
                 }
                 
-                guard
-                    let firstPlacemark = placemarks?[0],
-                    let locality = firstPlacemark.locality,
-                    let country = firstPlacemark.country
-                else {
-                    return self.locality.onError(LocationServiceError.cannotProvideLocality)
+                guard let firstPlacemark = placemarks?[0] else {
+                    return self.error.accept(LocationServiceError.cannotProvideLocality)
                 }
                 
-                self.locality.onNext("\(locality), \(country)")
+                let locality = [firstPlacemark.locality, firstPlacemark.country]
+                    .filter { $0 != nil }
+                    .map { $0 ?? "" }
+                    .joined(separator: ", ")
+                
+                self.locality.accept(locality)
             }
     }
 
@@ -74,12 +75,12 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            self.location.on(.next(location))
+            self.location.accept(location)
             convertLocationToLocality(location: location)
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        location.on(.error(error))
+        self.error.accept(error)
     }
 }

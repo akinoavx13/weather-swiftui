@@ -28,6 +28,7 @@ final class LocationViewModel: ObservableObject {
         self.locationService = locationService
         
         bindLocation()
+        bindLocationError()
     }
     
     // MARK: - Methods
@@ -43,7 +44,16 @@ final class LocationViewModel: ObservableObject {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (locality) in
                 self?.locality = locality
-            }, onError: { [weak self] (_) in
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindLocationError() {
+        locationService
+            .error
+            .unwrap()
+            .asDriver(onErrorJustReturn: WeatheryError.generic)
+            .drive(onNext: { [weak self] (_) in
                 self?.locationService.stopUpdatingLocation()
             })
             .disposed(by: disposeBag)

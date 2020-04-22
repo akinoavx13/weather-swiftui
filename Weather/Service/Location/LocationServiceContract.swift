@@ -6,14 +6,15 @@
 //  Copyright © 2020 Maxime Maheo. All rights reserved.
 //
 
-import RxSwift
 import CoreLocation
+import RxCocoa
 
 protocol LocationServiceContract {
     
     // MARK: - Properties
-    var location: BehaviorSubject<CLLocation?> { get }
-    var locality: BehaviorSubject<String> { get }
+    var location: PublishRelay<CLLocation> { get }
+    var locality: PublishRelay<String> { get }
+    var error: BehaviorRelay<Error?> { get }
     
     // MARK: - Methods
     func refreshLocation()

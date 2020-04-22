@@ -10,6 +10,8 @@
 		52066F042449902500C85370 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52066F062449902500C85370 /* Localizable.strings */; };
 		52074B542446E18000931545 /* HumidityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52074B532446E18000931545 /* HumidityComponent.swift */; };
 		52074B562446E1EB00931545 /* WeatherIconComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52074B552446E1EB00931545 /* WeatherIconComponent.swift */; };
+		52075A80245097A5008B5485 /* SharedSequence+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52075A7F245097A5008B5485 /* SharedSequence+Unwrap.swift */; };
+		52075A82245097BF008B5485 /* ObservableType+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52075A81245097BF008B5485 /* ObservableType+Unwrap.swift */; };
 		521588A324450CA7003B8F65 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521588A224450CA7003B8F65 /* R.generated.swift */; };
 		521588A624450D32003B8F65 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 521588A524450D32003B8F65 /* Rswift */; };
 		521588A8244511B2003B8F65 /* NextForecastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521588A7244511B2003B8F65 /* NextForecastComponent.swift */; };
@@ -79,6 +81,8 @@
 		52066F072449902600C85370 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52074B532446E18000931545 /* HumidityComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumidityComponent.swift; sourceTree = "<group>"; };
 		52074B552446E1EB00931545 /* WeatherIconComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconComponent.swift; sourceTree = "<group>"; };
+		52075A7F245097A5008B5485 /* SharedSequence+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedSequence+Unwrap.swift"; sourceTree = "<group>"; };
+		52075A81245097BF008B5485 /* ObservableType+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Unwrap.swift"; sourceTree = "<group>"; };
 		521588A224450CA7003B8F65 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		521588A7244511B2003B8F65 /* NextForecastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextForecastComponent.swift; sourceTree = "<group>"; };
 		521588AA24451637003B8F65 /* Locale+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Language.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				521588AE24451A49003B8F65 /* Date+Format.swift */,
 				52236D3D244592E90007CF87 /* Color.swift */,
 				52EE1FB5244ED4AD009C9A7C /* View+SectionStyle.swift */,
+				52075A7F245097A5008B5485 /* SharedSequence+Unwrap.swift */,
+				52075A81245097BF008B5485 /* ObservableType+Unwrap.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -667,6 +673,7 @@
 				5217ED642444FB46006BEAE8 /* Reducer.swift in Sources */,
 				5217ED622444FB46006BEAE8 /* Log.swift in Sources */,
 				5217ED682444FB46006BEAE8 /* Action.swift in Sources */,
+				52075A82245097BF008B5485 /* ObservableType+Unwrap.swift in Sources */,
 				521588A8244511B2003B8F65 /* NextForecastComponent.swift in Sources */,
 				521588AB24451637003B8F65 /* Locale+Language.swift in Sources */,
 				524802382445DA1400B6DE0D /* DailyForecastComponent.swift in Sources */,
@@ -681,6 +688,7 @@
 				5217ED302444FAD9006BEAE8 /* SceneDelegate.swift in Sources */,
 				526095B2244A421200CFE05B /* ReloadButtonComponent.swift in Sources */,
 				52F6524A244B13A900BB7F57 /* AppInformationComponent.swift in Sources */,
+				52075A80245097A5008B5485 /* SharedSequence+Unwrap.swift in Sources */,
 				5217EDA624450734006BEAE8 /* ForecastEndpoint.swift in Sources */,
 				521588A324450CA7003B8F65 /* R.generated.swift in Sources */,
 				52EE1FB6244ED4AD009C9A7C /* View+SectionStyle.swift in Sources */,
