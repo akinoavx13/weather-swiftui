@@ -20,31 +20,29 @@ struct HomepageView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
-                if weatherViewModel.isLoading {
-                    LoadingComponent()
-                } else {
-                    if weatherViewModel.error == nil {
-                        LocalityComponent(showInformationModal: $showInformationModel,
-                                          locality: locationViewModel.locality)
-                        
-                        CurrentForecastComponent(temperature: Int(weatherViewModel.forecast?.currently.temperature ?? 0),
-                                                 feelingTemperature: Int(weatherViewModel.forecast?.currently.apparentTemperature ?? 0),
-                                                 icon: weatherViewModel.forecast?.currently.imageIcon,
-                                                 imageDescription: weatherViewModel.forecast?.currently.icon ?? "")
-                        
-                        NextForecastComponent(summary: weatherViewModel.forecast?.hourly.summary ?? "",
-                                              hourlyForecasts: weatherViewModel.forecast?.hourly.data ?? [])
-
-                        WeekForecastComponent(summary: weatherViewModel.forecast?.daily.summary ?? "",
-                                              dailyForecasts: Array(weatherViewModel.forecast?.daily.data.prefix(7) ?? []))
-                    }
+                if weatherViewModel.error == nil {
+                    LocalityComponent(showInformationModal: $showInformationModel,
+                                      locality: locationViewModel.locality)
                     
-                    Spacer()
+                    CurrentForecastComponent(temperature: Int(weatherViewModel.forecast?.currently.temperature ?? 0),
+                                             feelingTemperature: Int(weatherViewModel.forecast?.currently.apparentTemperature ?? 0),
+                                             icon: weatherViewModel.forecast?.currently.imageIcon,
+                                             imageDescription: weatherViewModel.forecast?.currently.icon ?? "")
+                    
+                    NextForecastComponent(summary: weatherViewModel.forecast?.hourly.summary ?? "",
+                                          hourlyForecasts: weatherViewModel.forecast?.hourly.data ?? [])
 
-                    ReloadButtonComponent(lastUpdate: weatherViewModel.lastUpdate)
-
-                    AppInformationComponent()
+                    WeekForecastComponent(summary: weatherViewModel.forecast?.daily.summary ?? "",
+                                          dailyForecasts: Array(weatherViewModel.forecast?.daily.data.prefix(7) ?? []))
+                } else {
+                    ErrorComponent(message: weatherViewModel.error?.customMessage ?? "")
                 }
+                
+                Spacer()
+
+                ReloadButtonComponent(lastUpdate: weatherViewModel.lastUpdate)
+
+                AppInformationComponent()
             }
         }
         .padding()

@@ -14,7 +14,6 @@ final class WeatherViewModel: ObservableObject {
     
     // MARK: - Properties
     @Published var forecast: Forecast?
-    @Published var isLoading: Bool = true
     @Published var lastUpdate: Date = Date()
     @Published var error: WeatheryError?
     
@@ -43,13 +42,19 @@ final class WeatherViewModel: ObservableObject {
         locationService
             .location
             .subscribe(onNext: { [weak self] (location) in
-                self?.fetchForecast(latitude: location.coordinate.longitude, longitude: location.coordinate.longitude)
+                if let location = location {
+                    self?.fetchForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                }
+            }, onError: { [weak self] (error) in
+                guard let self = self else { return }
+
+                self.error = WeatheryError(error: error)
+                self.locationService.stopUpdatingLocation()
             })
             .disposed(by: disposeBag)
     }
     
     private func fetchForecast(latitude: Double, longitude: Double) {
-        isLoading = true
         error = nil
         
         weatherService
@@ -60,13 +65,12 @@ final class WeatherViewModel: ObservableObject {
                 guard let self = self else { return }
                 
                 self.forecast = forecast
-                self.isLoading = false
                 self.lastUpdate = Date()
             }, onError: { [weak self] (error) in
                 guard let self = self else { return }
-                
-                self.isLoading = false
+
                 self.error = WeatheryError(error: error)
+                self.locationService.stopUpdatingLocation()
             })
             .disposed(by: disposeBag)
     }

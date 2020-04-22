@@ -12,10 +12,11 @@ import CoreLocation
 protocol LocationServiceContract {
     
     // MARK: - Properties
-    var location: PublishSubject<CLLocation> { get }
+    var location: BehaviorSubject<CLLocation?> { get }
     var locality: BehaviorSubject<String> { get }
     
     // MARK: - Methods
     func refreshLocation()
+    func stopUpdatingLocation()
 
 }

@@ -18,7 +18,7 @@ enum LocationServiceError: Error {
 final class LocationService: NSObject, LocationServiceContract {
 
     // MARK: - Properties
-    var location: PublishSubject<CLLocation> = .init()
+    var location: BehaviorSubject<CLLocation?> = .init(value: nil)
     var locality: BehaviorSubject<String> = .init(value: "")
     
     private let manager = CLLocationManager()
@@ -35,8 +35,14 @@ final class LocationService: NSObject, LocationServiceContract {
     }
     
     func refreshLocation() {
-        manager.stopUpdatingLocation()
+        stopUpdatingLocation()
         manager.startUpdatingLocation()
+    }
+    
+    func stopUpdatingLocation() {
+        manager.stopUpdatingLocation()
+        locality.onNext("")
+        location.onNext(nil)
     }
     
     // MARK: - Private methods
