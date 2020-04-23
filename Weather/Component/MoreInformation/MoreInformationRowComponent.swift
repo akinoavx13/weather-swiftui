@@ -24,7 +24,7 @@ struct MoreInformationRowComponent: View {
             
             Text(value)
         }
-        .padding(.top, 8)
+        .padding(.vertical, 4)
     }
 }
 

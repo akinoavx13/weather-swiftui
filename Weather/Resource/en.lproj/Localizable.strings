@@ -50,4 +50,5 @@
 "probability" = "Probability";
 "type" = "Type";
 "pressure" = "Pressure";
-
+"sunrise" = "Sunrise";
+"sunset" = "Sunset";

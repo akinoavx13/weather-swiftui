@@ -40,9 +40,8 @@ final class LocationViewModel: ObservableObject {
     private func bindLocation() {
         locationService
             .locality
-            .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (locality) in
+            .asDriver(onErrorJustReturn: R.string.localizable.unknown())
+            .drive(onNext: { [weak self] (locality) in
                 self?.locality = locality
             })
             .disposed(by: disposeBag)

@@ -51,6 +51,32 @@ struct DataForecast: Codable, Identifiable {
         Date(timeIntervalSince1970: time)
     }
     
+    var sunriseDate: Date? {
+        if let sunriseTime = sunriseTime {
+            return Date(timeIntervalSince1970: sunriseTime)
+        }
+        return nil
+    }
+    
+    var sunsetDate: Date? {
+        if let sunsetTime = sunsetTime {
+            return Date(timeIntervalSince1970: sunsetTime)
+        }
+        return nil
+    }
+    
+    var precipTypeIcon: UIImage? {
+        if precipType == "rain" {
+            return R.image.icn_weather_rain()
+        } else if precipType == "snow" {
+            return R.image.icn_weather_snow()
+        } else if precipType == "sleet" {
+            return R.image.icn_weather_sleet()
+        }
+        
+        return nil
+    }
+    
     var imageIcon: UIImage? {
         if icon == "clear-day" {
             return R.image.icn_weather_sun()

@@ -14,7 +14,8 @@ extension View {
         self.padding()
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
-            .padding()
+            .padding(.horizontal)
+            .padding(.vertical, 8)
     }
     
 }

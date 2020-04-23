@@ -47,13 +47,16 @@ struct HomepageView: View {
         }
         .padding()
         .sheet(isPresented: $showInformationModel) {
-            InformationModelView(latitude: self.weatherViewModel.forecast?.latitude ?? 0,
+            MoreInformationView(latitude: self.weatherViewModel.forecast?.latitude ?? 0,
                                  longitude: self.weatherViewModel.forecast?.longitude ?? 0,
                                  precipitationAccumulation: self.weatherViewModel.forecast?.currently.precipAccumulation ?? 0,
                                  precipitationIntensity: self.weatherViewModel.forecast?.currently.precipIntensity ?? 0,
                                  precipitationProbability: self.weatherViewModel.forecast?.currently.precipProbability ?? 0,
-                                 precipitationType: self.weatherViewModel.forecast?.currently.precipType ?? R.string.localizable.unknown(),
-                                 pressure: self.weatherViewModel.forecast?.currently.pressure ?? 0)
+                                 precipitationType: self.weatherViewModel.forecast?.currently.precipType,
+                                 precipitationTypeImage: self.weatherViewModel.forecast?.currently.precipTypeIcon,
+                                 pressure: self.weatherViewModel.forecast?.currently.pressure ?? 0,
+                                 sunrise: self.weatherViewModel.forecast?.currently.sunriseDate,
+                                 sunset: self.weatherViewModel.forecast?.currently.sunsetDate)
         }
         .alert(isPresented: .constant(weatherViewModel.error != nil)) {
             Alert(title: Text(weatherViewModel.error!.customTitle),
