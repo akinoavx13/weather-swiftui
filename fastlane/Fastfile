@@ -30,7 +30,8 @@ platform :ios do
       overwrite_screenshots: true,
       submit_for_review: true,
       reject_if_possible: true,
-      automatic_release: true
+      automatic_release: true,
+      app_review_attachment_file: "./metadata/demo-apple.MP4"
     )
     git_commit(path: "*", message: "New release with Fastlane 🚀")
   end
