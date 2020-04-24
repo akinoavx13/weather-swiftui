@@ -21,21 +21,35 @@ struct MoreInformationView: View {
     var pressure: Float
     var sunrise: Date?
     var sunset: Date?
+    var minimumTemperature: Int
+    var maximumTemperature: Int
+    var uvIndex: Int
+    var visibility: Float
+    var windSpeed: Float
+    var windBearing: Double
     
     // MARK: - Body
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
                 
-                makeCoordinatesView()
+                makeCoordinatesComponent()
                 
-                makePrecipitationView()
+                makePrecipitationComponent()
                 
-                makePressureView()
+                makePressureComponent()
 
                 if sunrise != nil || sunset != nil {
-                    makeSunriseSunsetView()
+                    makeSunriseSunsetComponent()
                 }
+                
+                makeTemperatureComponent()
+                
+                makeUVIndexComponent()
+                
+                makeVisibilityComponent()
+                
+                makeWindComponent()
                 
                 Spacer()
             }
@@ -46,15 +60,15 @@ struct MoreInformationView: View {
 
 extension MoreInformationView {
     
-    private func makeSectionTitle(title: String) -> some View {
+    private func makeSectionTitleComponent(title: String) -> some View {
         Text(title)
             .font(.caption)
             .padding(.bottom, 8)
     }
     
-    private func makeCoordinatesView() -> some View {
+    private func makeCoordinatesComponent() -> some View {
         VStack(alignment: .leading) {
-            makeSectionTitle(title: R.string.localizable.coordinates())
+            makeSectionTitleComponent(title: R.string.localizable.coordinates())
             
             MoreInformationRowComponent(title: R.string.localizable.latitude(),
                                         value: "\(latitude)")
@@ -65,9 +79,9 @@ extension MoreInformationView {
         .sectionStyle()
     }
     
-    private func makePrecipitationView() -> some View {
+    private func makePrecipitationComponent() -> some View {
         VStack(alignment: .leading) {
-            makeSectionTitle(title: R.string.localizable.precipication())
+            makeSectionTitleComponent(title: R.string.localizable.precipication())
             
             MoreInformationRowComponent(title: R.string.localizable.accumulation(),
                                         value: "\(precipitationAccumulation * 10) mm")
@@ -87,13 +101,13 @@ extension MoreInformationView {
         .sectionStyle()
     }
     
-    private func makePressureView() -> some View {
+    private func makePressureComponent() -> some View {
         MoreInformationRowComponent(title: R.string.localizable.pressure(),
                                 value: "\(pressure) hPa")
         .sectionStyle()
     }
     
-    private func makeSunriseSunsetView() -> some View {
+    private func makeSunriseSunsetComponent() -> some View {
         VStack(alignment: .leading) {
             Unwrap(sunrise) {
                 MoreInformationRowComponent(title: R.string.localizable.sunrise(),
@@ -107,9 +121,38 @@ extension MoreInformationView {
         }
         .sectionStyle()
     }
+    
+    private func makeTemperatureComponent() -> some View {
+        VStack(alignment: .leading) {
+            makeSectionTitleComponent(title: R.string.localizable.temperatures())
+            
+            MoreInformationRowComponent(title: R.string.localizable.minimum_temperature(),
+                                        value: "\(minimumTemperature) °")
+            
+            MoreInformationRowComponent(title: R.string.localizable.maximum_temperature(),
+                                        value: "\(maximumTemperature) °")
+        }
+        .sectionStyle()
+    }
+    
+    private func makeUVIndexComponent() -> some View {
+        MoreInformationUVIndexRowComponent(uvIndex: uvIndex)
+            .sectionStyle()
+    }
+    
+    private func makeVisibilityComponent() -> some View {
+        MoreInformationRowComponent(title: R.string.localizable.visibility(),
+                                    value: "\(visibility) km")
+            .sectionStyle()
+    }
+    
+    private func makeWindComponent() -> some View {
+        MoreInformationWindRowComponent(speed: windSpeed,
+                                        bearing: windBearing)
+            .sectionStyle()
+    }
+    
 }
-
-#if DEBUG
 
 struct MoreInformationView_Previews: PreviewProvider {
     static var previews: some View {
@@ -122,8 +165,12 @@ struct MoreInformationView_Previews: PreviewProvider {
                              precipitationTypeImage: R.image.icn_weather_rain(),
                              pressure: 1004,
                              sunrise: Date(timeIntervalSince1970: 255613996),
-                             sunset: Date(timeIntervalSince1970: 255650764))
+                             sunset: Date(timeIntervalSince1970: 255650764),
+                             minimumTemperature: 12,
+                             maximumTemperature: 25,
+                             uvIndex: 4,
+                             visibility: 12,
+                             windSpeed: 12,
+                             windBearing: 235)
     }
 }
-
-#endif

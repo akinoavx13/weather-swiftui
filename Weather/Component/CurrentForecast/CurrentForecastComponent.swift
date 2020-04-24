@@ -41,8 +41,6 @@ struct CurrentForecastComponent: View {
     }
 }
 
-#if DEBUG
-
 struct CurrentForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         CurrentForecastComponent(temperature: 22,
@@ -51,5 +49,3 @@ struct CurrentForecastComponent_Previews: PreviewProvider {
                                  imageDescription: "sun")
     }
 }
-
-#endif

@@ -29,13 +29,9 @@ struct SectionTitleComponent: View {
     }
 }
 
-#if DEBUG
-
 struct SectionTitleComponent_Previews: PreviewProvider {
     static var previews: some View {
         SectionTitleComponent(title: "Title",
                               subtitle: "Subtitle")
     }
 }
-
-#endif

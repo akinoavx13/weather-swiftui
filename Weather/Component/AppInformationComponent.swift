@@ -28,12 +28,8 @@ struct AppInformationComponent: View {
     }
 }
 
-#if DEBUG
-
 struct AppInformationComponent_Previews: PreviewProvider {
     static var previews: some View {
         AppInformationComponent()
     }
 }
-
-#endif

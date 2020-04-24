@@ -34,13 +34,9 @@ struct WeekForecastComponent: View {
     }
 }
 
-#if DEBUG
-
 struct WeekForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         WeekForecastComponent(summary: "Light rain Friday until next Tuesday.",
                               dailyForecasts: DataForecast.list)
     }
 }
-
-#endif

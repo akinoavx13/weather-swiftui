@@ -40,8 +40,6 @@ struct ReloadButtonComponent: View {
     }
 }
 
-#if DEBUG
-
 struct ReloadButtonComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -58,5 +56,3 @@ struct ReloadButtonComponent_Previews: PreviewProvider {
         
     }
 }
-
-#endif

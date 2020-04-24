@@ -31,8 +31,6 @@ struct HumidityComponent: View {
     }
 }
 
-#if DEBUG
-
 struct HumidityComponent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -48,5 +46,3 @@ struct HumidityComponent_Previews: PreviewProvider {
         
     }
 }
-
-#endif

@@ -52,3 +52,7 @@
 "pressure" = "Pressure";
 "sunrise" = "Sunrise";
 "sunset" = "Sunset";
+"temperatures" = "Temperatures";
+"uv_index" = "UV Index";
+"visibility" = "Visibility";
+"wind_speed" = "Wind speed";

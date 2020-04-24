@@ -73,6 +73,8 @@
 		52D9DD19244985E200647079 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D9DD18244985E200647079 /* LocationService.swift */; };
 		52EE1FB1244ECF22009C9A7C /* MoreInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE1FB0244ECF22009C9A7C /* MoreInformationView.swift */; };
 		52EE1FB6244ED4AD009C9A7C /* View+SectionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE1FB5244ED4AD009C9A7C /* View+SectionStyle.swift */; };
+		52F56B702452C4E400A9E653 /* MoreInformationUVIndexRowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56B6F2452C4E400A9E653 /* MoreInformationUVIndexRowComponent.swift */; };
+		52F56B722452C9A100A9E653 /* MoreInformationWindRowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56B712452C9A100A9E653 /* MoreInformationWindRowComponent.swift */; };
 		52F6524A244B13A900BB7F57 /* AppInformationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65249244B13A900BB7F57 /* AppInformationComponent.swift */; };
 		C37D1848E18B1FE54E26CCBE /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8E48DD9EF8CABA035C0DB9 /* Pods_Weather.framework */; };
 /* End PBXBuildFile section */
@@ -145,6 +147,8 @@
 		52D9DD18244985E200647079 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		52EE1FB0244ECF22009C9A7C /* MoreInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationView.swift; sourceTree = "<group>"; };
 		52EE1FB5244ED4AD009C9A7C /* View+SectionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+SectionStyle.swift"; sourceTree = "<group>"; };
+		52F56B6F2452C4E400A9E653 /* MoreInformationUVIndexRowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationUVIndexRowComponent.swift; sourceTree = "<group>"; };
+		52F56B712452C9A100A9E653 /* MoreInformationWindRowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationWindRowComponent.swift; sourceTree = "<group>"; };
 		52F65249244B13A900BB7F57 /* AppInformationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationComponent.swift; sourceTree = "<group>"; };
 		8F2F12FC1ADC9EE7474DFFE5 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		9F8E48DD9EF8CABA035C0DB9 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -404,6 +408,8 @@
 			children = (
 				523FB5F6244F409900301A7A /* MoreInformationRowComponent.swift */,
 				529F8387245171F500C446E1 /* MoreInformationImageRowComponent.swift */,
+				52F56B6F2452C4E400A9E653 /* MoreInformationUVIndexRowComponent.swift */,
+				52F56B712452C9A100A9E653 /* MoreInformationWindRowComponent.swift */,
 			);
 			path = MoreInformation;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				52950994244D812A00D2F9B0 /* LocalityComponent.swift in Sources */,
 				5217ED5C2444FB46006BEAE8 /* BaseRequest.swift in Sources */,
 				52074B542446E18000931545 /* HumidityComponent.swift in Sources */,
+				52F56B702452C4E400A9E653 /* MoreInformationUVIndexRowComponent.swift in Sources */,
 				5218231E2451758300844FBE /* Unwrap.swift in Sources */,
 				52950990244CC75F00D2F9B0 /* ErrorComponent.swift in Sources */,
 				529F8388245171F500C446E1 /* MoreInformationImageRowComponent.swift in Sources */,
@@ -715,6 +722,7 @@
 				523FB5F7244F409900301A7A /* MoreInformationRowComponent.swift in Sources */,
 				521CD9CE24501E3B005EA30E /* LocationViewModel.swift in Sources */,
 				5217ED6C2444FB46006BEAE8 /* Store.swift in Sources */,
+				52F56B722452C9A100A9E653 /* MoreInformationWindRowComponent.swift in Sources */,
 				5217ED612444FB46006BEAE8 /* DependencyContainer.swift in Sources */,
 				5217ED602444FB46006BEAE8 /* ApiEndpoint.swift in Sources */,
 				5217EDAE244509E1006BEAE8 /* AppDependency.swift in Sources */,

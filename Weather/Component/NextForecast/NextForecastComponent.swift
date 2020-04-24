@@ -52,13 +52,9 @@ struct NextForecastComponent: View {
     }
 }
 
-#if DEBUG
-
 struct NextForecastComponent_Previews: PreviewProvider {
     static var previews: some View {
         NextForecastComponent(summary: "Clear skies all day.",
                               hourlyForecasts: DataForecast.list)
     }
 }
-
-#endif
