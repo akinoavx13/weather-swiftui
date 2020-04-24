@@ -1,1 +1,1 @@
-In this update, you will find performance improvement of the application, bug fixes as well as the addition of a screen displaying more information (under development).
+In this update, you will find performance improvement of the application, bug fixes as well as the addition of a screen displaying more information.
