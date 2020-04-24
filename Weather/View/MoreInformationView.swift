@@ -31,27 +31,29 @@ struct MoreInformationView: View {
     // MARK: - Body
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                
-                makeCoordinatesComponent()
-                
-                makePrecipitationComponent()
-                
-                makePressureComponent()
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading) {
+                    
+                    makeCoordinatesComponent()
+                    
+                    makePrecipitationComponent()
+                    
+                    makePressureComponent()
 
-                if sunrise != nil || sunset != nil {
-                    makeSunriseSunsetComponent()
+                    if sunrise != nil || sunset != nil {
+                        makeSunriseSunsetComponent()
+                    }
+                    
+                    makeTemperatureComponent()
+                    
+                    makeUVIndexComponent()
+                    
+                    makeVisibilityComponent()
+                    
+                    makeWindComponent()
+                    
+                    Spacer()
                 }
-                
-                makeTemperatureComponent()
-                
-                makeUVIndexComponent()
-                
-                makeVisibilityComponent()
-                
-                makeWindComponent()
-                
-                Spacer()
             }
             .navigationBarTitle(Text(R.string.localizable.more_information()))
         }
