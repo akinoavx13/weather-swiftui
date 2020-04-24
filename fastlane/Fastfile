@@ -31,7 +31,7 @@ platform :ios do
       submit_for_review: true,
       reject_if_possible: true,
       automatic_release: true,
-      app_review_attachment_file: "./metadata/demo-apple.MP4"
+      app_review_attachment_file: "./fastlane/metadata/demo-apple.MP4"
     )
     git_commit(path: "*", message: "New release with Fastlane 🚀")
   end
