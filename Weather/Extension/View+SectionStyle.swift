@@ -20,8 +20,6 @@ extension View {
     
 }
 
-#if DEBUG
-
 struct SectionStyle_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
@@ -30,5 +28,3 @@ struct SectionStyle_Previews: PreviewProvider {
         .sectionStyle()
     }
 }
-
-#endif

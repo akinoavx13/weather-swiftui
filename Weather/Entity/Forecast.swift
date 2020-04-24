@@ -142,8 +142,6 @@ struct DataForecast: Codable, Identifiable {
     }
 }
 
-#if DEBUG
-
 extension DataForecast {
     static let one = DataForecast(apparentTemperature: 14.68,
                                   cloudCover: 0.99,
@@ -217,5 +215,3 @@ extension DataForecasts {
                                    data: DataForecast.list)
     
 }
-
-#endif
