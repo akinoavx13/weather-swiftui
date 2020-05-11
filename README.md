@@ -16,6 +16,8 @@ Accessible weather app for the blind and visually impaired
 
 * Download Xcode 11.4 or higher
 * Put your Dark Sky Api key in `Weather/Util/DarkSky.swift`
+* Install pods (Firebase ...) `pod install`
+* Open project `open Weather.xcworkspace`
 
 ## Dependencies
 
